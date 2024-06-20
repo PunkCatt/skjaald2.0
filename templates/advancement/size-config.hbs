@@ -1,0 +1,10 @@
+<form autocomplete="off">
+    {{> "skjaald.advancement-controls"}}
+
+    <div class="form-group">
+        <label>{{localize "SKJAALD.AdvancementHint"}}</label>
+        <textarea name="configuration.hint" placeholder="{{default.hint}}">{{configuration.hint}}</textarea>
+    </div>
+
+    {{> "skjaald.trait-list" choices=sizes prefix="configuration.sizes"}}
+</form>

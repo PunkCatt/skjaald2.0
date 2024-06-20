@@ -1,0 +1,20 @@
+<form autocomplete="off" onsubmit="event.preventDefault();">
+    {{> "skjaald.trait-list" prefix="choices"}}
+
+    {{#if customPath}}
+        <div class="form-group stacked">
+            <label>{{localize "SKJAALD.TraitSelectorSpecial"}}</label>
+            <div class="form-fields">
+                <input type="text" name="{{customPath}}" value="{{custom}}">
+            </div>
+        </div>
+    {{/if}}
+
+    {{#if bypassesPath}}
+        <h3>{{localize "SKJAALD.DamagePhysicalBypass"}}</h3>
+        <p class="note">{{localize "SKJAALD.DamagePhysicalBypassHint"}}</p>
+        {{> "skjaald.trait-list" choices=bypasses prefix="bypasses"}}
+    {{/if}}
+
+    <button type="submit"><i class="far fa-save"></i> {{localize "SKJAALD.TraitSave"}}</button>
+</form>
