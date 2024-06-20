@@ -7,7 +7,7 @@
         "minimum": "11.315",
         "verified": "12"
     },
-    "url": "https://github.com/foundryvtt/skjaald/",
+    "url": "https://github.com/PunkCatt/skjaald2.0",
     "manifest": "https://raw.githubusercontent.com/PunkCatt/skjaald2.0/main/system.json",
     "download": "https://github.com/PunkCatt/skjaald2.0/archive/refs/heads/main.zip",
     "authors": [
