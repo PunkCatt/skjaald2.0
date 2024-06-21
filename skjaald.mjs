@@ -43563,7 +43563,7 @@ class ChatMessage5e extends ChatMessage {
     });
 
     // Enriched roll flavor
-    const roll = this.getFlag("skjaald", "roll");
+    const roll = this.getFlag("skjaald2", "roll");
     const item = fromUuidSync(roll?.itemUuid);
     if ( this.isContentVisible && item ) {
       const isCritical = (roll.type === "damage") && this.rolls[0]?.options?.critical;
