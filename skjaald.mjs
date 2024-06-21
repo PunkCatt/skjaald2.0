@@ -5440,7 +5440,7 @@ class SummonsData extends foundry.abstract.DataModel {
   get summonedCreatures() {
     if ( !this.item.actor ) return [];
     return SummonsData.summonedCreatures(this.item.actor)
-      .filter(i => i?.getFlag("skjaald", "summon.origin") === this.item.uuid);
+      .filter(i => i?.getFlag("skjaald2", "summon.origin") === this.item.uuid);
   }
 
   /* -------------------------------------------- */
@@ -5561,17 +5561,17 @@ class SummonsData extends foundry.abstract.DataModel {
     if ( !actor ) throw new Error(game.i18n.format("SKJAALD.Summoning.Warning.NoActor", { uuid }));
 
     const actorLink = actor.prototypeToken.actorLink;
-    if ( !actor.pack && (!actorLink || actor.getFlag("skjaald", "summon.origin") === this.item.uuid )) return actor;
+    if ( !actor.pack && (!actorLink || actor.getFlag("skjaald2", "summon.origin") === this.item.uuid )) return actor;
 
     // Search world actors to see if any usable summoned actor instances are present from prior summonings.
     // Linked actors must match the summoning origin (item) to be considered.
     const localActor = game.actors.find(a =>
       // Has been cloned for summoning use
-      a.getFlag("skjaald", "summonedCopy")
+      a.getFlag("skjaald2", "summonedCopy")
       // Sourced from the desired actor UUID
       && (a.getFlag("core", "sourceId") === uuid)
       // Unlinked or created from this item specifically
-      && ((a.getFlag("skjaald", "summon.origin") === this.item.uuid) || !a.prototypeToken.actorLink)
+      && ((a.getFlag("skjaald2", "summon.origin") === this.item.uuid) || !a.prototypeToken.actorLink)
     );
     if ( localActor ) return localActor;
 
@@ -6012,7 +6012,7 @@ class EnchantmentData extends foundry.abstract.DataModel {
    * @type {ActiveEffect5e[]}
    */
   get enchantments() {
-    return this.item.effects.filter(ae => ae.getFlag("skjaald", "type") === "enchantment");
+    return this.item.effects.filter(ae => ae.getFlag("skjaald2", "type") === "enchantment");
   }
 
   /* -------------------------------------------- */
@@ -6084,8 +6084,8 @@ class EnchantmentData extends foundry.abstract.DataModel {
         : "details.level";
     const level = foundry.utils.getProperty(item.getRollData(), keyPath) ?? 0;
     return item.effects.filter(e => {
-      if ( (e.getFlag("skjaald", "type") !== "enchantment") || e.isAppliedEnchantment ) return false;
-      const { min, max } = e.getFlag("skjaald", "enchantment.level") ?? {};
+      if ( (e.getFlag("skjaald2", "type") !== "enchantment") || e.isAppliedEnchantment ) return false;
+      const { min, max } = e.getFlag("skjaald2", "enchantment.level") ?? {};
       return ((min ?? -Infinity) <= level) && (level <= (max ?? Infinity));
     });
   }
@@ -6858,7 +6858,7 @@ class ActiveEffect5e extends ActiveEffect {
       return;
     }
     const choices = effects.reduce((acc, effect) => {
-      const data = effect.getFlag("skjaald", "itemData");
+      const data = effect.getFlag("skjaald2", "itemData");
       acc[effect.id] = data?.name ?? actor.items.get(data)?.name ?? game.i18n.localize("SKJAALD.ConcentratingItemless");
       return acc;
     }, {});
@@ -11243,7 +11243,7 @@ class AbilityUseDialog extends Dialog {
   static _createConcentrationOptions(item) {
     const { effects } = item.actor.concentration;
     return effects.reduce((acc, effect) => {
-      const data = effect.getFlag("skjaald", "itemData");
+      const data = effect.getFlag("skjaald2", "itemData");
       acc.push({
         name: effect.id,
         label: data?.name ?? item.actor.items.get(data)?.name ?? game.i18n.localize("SKJAALD.ConcentratingItemless")
@@ -13019,7 +13019,7 @@ class Item5e extends SystemDocumentMixin(Item) {
       config: CONFIG.SKJAALD,
       tokenId: token?.uuid || null,
       item: this,
-      effects: this.effects.filter(e => (e.getFlag("skjaald", "type") !== "enchantment") && !e.getFlag("skjaald", "rider")),
+      effects: this.effects.filter(e => (e.getFlag("skjaald2", "type") !== "enchantment") && !e.getFlag("skjaald2", "rider")),
       data: await this.system.getCardData(),
       labels: this.labels,
       hasAttack: this.hasAttack,
@@ -13340,7 +13340,7 @@ class Item5e extends SystemDocumentMixin(Item) {
 
     // Factor in extra critical damage dice from the Barbarian's "Brutal Critical"
     if ( this.system.actionType === "mwak" ) {
-      rollConfig.criticalBonusDice = this.actor.getFlag("skjaald", "meleeCriticalDamageDice") ?? 0;
+      rollConfig.criticalBonusDice = this.actor.getFlag("skjaald2", "meleeCriticalDamageDice") ?? 0;
     }
 
     // Factor in extra weapon-specific critical damage
@@ -13642,7 +13642,7 @@ class Item5e extends SystemDocumentMixin(Item) {
       if ( !( isTargetted || game.user.isGM || actor.isOwner ) ) return;
 
       // Get the Item from stored flag data or by the item ID on the Actor
-      const storedData = message.getFlag("skjaald", "itemData");
+      const storedData = message.getFlag("skjaald2", "itemData");
       let item = storedData ? new this(storedData, {parent: actor}) : actor.items.get(card.dataset.itemId);
       if ( !item ) {
         ui.notifications.error(game.i18n.format("SKJAALD.ActionWarningNoItem", {
@@ -13670,7 +13670,7 @@ class Item5e extends SystemDocumentMixin(Item) {
           const li = button.closest("li.effect");
           let effect = item.effects.get(li.dataset.effectId);
           if ( !effect ) effect = await fromUuid(li.dataset.uuid);
-          const concentration = actor.effects.get(message.getFlag("skjaald", "use.concentrationId"));
+          const concentration = actor.effects.get(message.getFlag("skjaald2", "use.concentrationId"));
           const effectData = { "flags.skjaald.spellLevel": spellLevel };
           for ( const token of canvas.tokens.controlled ) {
             try {
@@ -14351,7 +14351,7 @@ class Item5e extends SystemDocumentMixin(Item) {
    */
   static async createScrollFromSpell(spell, options={}, config={}) {
     config = foundry.utils.mergeObject({
-      explanation: game.user.getFlag("skjaald", "creation.scrollExplanation") ?? "reference",
+      explanation: game.user.getFlag("skjaald2", "creation.scrollExplanation") ?? "reference",
       level: spell.system.level
     }, config);
 
@@ -14938,7 +14938,7 @@ class Award extends DialogMixin(FormApplication) {
 
       // Otherwise show the UI with defaults
       else {
-        const savedDestinations = game.user.getFlag("skjaald", "awardDestinations");
+        const savedDestinations = game.user.getFlag("skjaald2", "awardDestinations");
         const app = new Award(null, { currency, xp, each, savedDestinations });
         app.render(true);
       }
@@ -17539,7 +17539,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
 
     for ( const effect of this.effects ) {
       if ( !effect.statuses.has(CONFIG.specialStatusEffects.CONCENTRATING) ) continue;
-      const data = effect.getFlag("skjaald", "itemData");
+      const data = effect.getFlag("skjaald2", "itemData");
       concentration.effects.add(effect);
       if ( data ) {
         const item = typeof data === "string"
@@ -17624,7 +17624,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   *allApplicableEffects() {
     for ( const effect of super.allApplicableEffects() ) {
-      if ( (effect.getFlag("skjaald", "type") !== "enchantment") && !effect.getFlag("skjaald", "rider") ) yield effect;
+      if ( (effect.getFlag("skjaald2", "type") !== "enchantment") && !effect.getFlag("skjaald2", "rider") ) yield effect;
     }
   }
 
@@ -18601,7 +18601,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
     else if ( target instanceof ActiveEffect5e ) effect = effects.has(target) ? target : null;
     else if ( target instanceof Item5e ) {
       effect = effects.find(e => {
-        const data = e.getFlag("skjaald", "itemData") ?? {};
+        const data = e.getFlag("skjaald2", "itemData") ?? {};
         return (data === target._id) || (data._id === target._id);
       });
     }
@@ -20508,7 +20508,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
         return;
       }
       const prototypeTokenData = await baseActor.getTokenDocument();
-      const actorData = this.token.getFlag("skjaald", "previousActorData");
+      const actorData = this.token.getFlag("skjaald2", "previousActorData");
       const tokenUpdate = this.token.toObject();
       actorData._id = tokenUpdate.delta._id;
       tokenUpdate.delta = actorData;
@@ -27016,7 +27016,7 @@ class EffectsElement extends HTMLElement {
         if ( e.disabled ) categories.enchantmentInactive.effects.push(e);
         else categories.enchantmentActive.effects.push(e);
       }
-      else if ( e.getFlag("skjaald", "type") === "enchantment" ) categories.enchantment.effects.push(e);
+      else if ( e.getFlag("skjaald2", "type") === "enchantment" ) categories.enchantment.effects.push(e);
       else if ( e.isSuppressed ) categories.suppressed.effects.push(e);
       else if ( e.disabled ) categories.inactive.effects.push(e);
       else if ( e.isTemporary ) categories.temporary.effects.push(e);
@@ -29896,7 +29896,7 @@ class ActorSheet5eCharacter extends ActorSheet5e {
       ctx.concealDetails = !game.user.isGM && (item.system.identified === false);
 
       // Item grouping
-      const [originId] = item.getFlag("skjaald", "advancementOrigin")?.split(".") ?? [];
+      const [originId] = item.getFlag("skjaald2", "advancementOrigin")?.split(".") ?? [];
       const group = this.actor.items.get(originId);
       switch ( group?.type ) {
         case "race": ctx.group = "race"; break;
@@ -30638,7 +30638,7 @@ class AttributesFields {
    */
   static prepareExhaustionLevel() {
     const exhaustion = this.parent.effects.get(ActiveEffect5e.ID.EXHAUSTION);
-    const level = exhaustion?.getFlag("skjaald", "exhaustionLevel");
+    const level = exhaustion?.getFlag("skjaald2", "exhaustionLevel");
     this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
   }
 
@@ -31638,7 +31638,7 @@ class Tabs5e extends Tabs {
 class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   constructor(object, options={}) {
     const key = `character${object.limited ? ":limited" : ""}`;
-    const { width, height } = game.user.getFlag("skjaald", `sheetPrefs.${key}`) ?? {};
+    const { width, height } = game.user.getFlag("skjaald2", `sheetPrefs.${key}`) ?? {};
     if ( width && !("width" in options) ) options.width = width;
     if ( height && !("height" in options) ) options.height = height;
     super(object, options);
@@ -31797,7 +31797,7 @@ class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
     // Set theme
     // TODO: Re-enable this when we support V12 only
-    // setTheme(html[0], this.actor.getFlag("skjaald", "theme"));
+    // setTheme(html[0], this.actor.getFlag("skjaald2", "theme"));
 
     return html;
   }
@@ -31825,7 +31825,7 @@ class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     context.cssClass = context.editable ? "editable" : this.isEditable ? "interactable" : "locked";
     const activeTab = (game.user.isGM || !this.actor.limited) ? this._tabs?.[0]?.active ?? "details" : "biography";
     context.cssClass += ` tab-${activeTab}`;
-    const sidebarCollapsed = game.user.getFlag("skjaald", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`);
+    const sidebarCollapsed = game.user.getFlag("skjaald2", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`);
     if ( sidebarCollapsed ) {
       context.cssClass += " collapsed";
       context.sidebarCollapsed = true;
@@ -31838,7 +31838,7 @@ class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     }).map(c => `${c.name} ${c.system.levels}`).join(" / ");
 
     // Portrait
-    const showTokenPortrait = this.actor.getFlag("skjaald", "showTokenPortrait") === true;
+    const showTokenPortrait = this.actor.getFlag("skjaald2", "showTokenPortrait") === true;
     const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
     context.portrait = {
       token: showTokenPortrait,
@@ -32345,7 +32345,7 @@ class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     super._onChangeTab(event, tabs, active);
     this.form.className = this.form.className.replace(/tab-\w+/g, "");
     this.form.classList.add(`tab-${active}`);
-    const sidebarCollapsed = game.user.getFlag("skjaald", `sheetPrefs.character.tabs.${active}.collapseSidebar`);
+    const sidebarCollapsed = game.user.getFlag("skjaald2", `sheetPrefs.character.tabs.${active}.collapseSidebar`);
     if ( sidebarCollapsed !== undefined ) this._toggleSidebar(sidebarCollapsed);
     const createChild = this.form.querySelector(".create-child");
     createChild.setAttribute("aria-label", game.i18n.format("SIDEBAR.Create", {
@@ -32500,7 +32500,7 @@ class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
    * @protected
    */
   _onShowPortrait() {
-    const showTokenPortrait = this.actor.getFlag("skjaald", "showTokenPortrait") === true;
+    const showTokenPortrait = this.actor.getFlag("skjaald2", "showTokenPortrait") === true;
     const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
     const img = showTokenPortrait ? token.texture.src : this.actor.img;
     new ImagePopout(img, { title: this.actor.name, uuid: this.actor.uuid }).render(true);
@@ -33740,7 +33740,7 @@ class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
       case "award":
-        const award = new Award(this.object, { savedDestinations: this.actor.getFlag("skjaald", "awardDestinations") });
+        const award = new Award(this.object, { savedDestinations: this.actor.getFlag("skjaald2", "awardDestinations") });
         award.render(true);
         break;
       case "longRest":
@@ -34334,7 +34334,7 @@ class DamageApplicationElement extends ChatTrayElement {
       this.targetSourceControl.querySelectorAll("button").forEach(b =>
         b.addEventListener("click", this._onChangeTargetMode.bind(this))
       );
-      if ( !this.chatMessage.getFlag("skjaald", "targets")?.length ) this.targetSourceControl.hidden = true;
+      if ( !this.chatMessage.getFlag("skjaald2", "targets")?.length ) this.targetSourceControl.hidden = true;
       div.addEventListener("click", this._handleClickHeader.bind(this));
     }
 
@@ -34350,7 +34350,7 @@ class DamageApplicationElement extends ChatTrayElement {
     let targetedTokens;
     switch ( this.targetingMode ) {
       case "targeted":
-        targetedTokens = (this.chatMessage.getFlag("skjaald", "targets") ?? []).map(t => t.uuid);
+        targetedTokens = (this.chatMessage.getFlag("skjaald2", "targets") ?? []).map(t => t.uuid);
         break;
       case "selected":
         targetedTokens = canvas.tokens?.controlled?.map(t => t.actor?.uuid) ?? [];
@@ -34715,7 +34715,7 @@ class EnchantmentApplicationElement extends HTMLElement {
   async _onDrop(event) {
     event.preventDefault();
     const data = TextEditor.getDragEventData(event);
-    const effect = this.enchantmentItem.effects.get(this.chatMessage.getFlag("skjaald", "use.enchantmentProfile"));
+    const effect = this.enchantmentItem.effects.get(this.chatMessage.getFlag("skjaald2", "use.enchantmentProfile"));
     if ( (data.type !== "Item") || !effect ) return;
     const droppedItem = await Item.implementation.fromDropData(data);
 
@@ -34727,7 +34727,7 @@ class EnchantmentApplicationElement extends HTMLElement {
     }
 
     // If concentration is required, ensure it is still being maintained & GM is present
-    const concentrationId = this.chatMessage.getFlag("skjaald", "use.concentrationId");
+    const concentrationId = this.chatMessage.getFlag("skjaald2", "use.concentrationId");
     const concentration = effect.parent.actor.effects.get(concentrationId);
     if ( concentrationId && !concentration ) {
       ui.notifications.error("SKJAALD.Enchantment.Warning.ConcentrationEnded", { localize: true });
@@ -35794,7 +35794,7 @@ class ItemListControlsElement extends HTMLElement {
    * @type {TabPreferences5e}
    */
   get prefs() {
-    return game.user.getFlag("skjaald", `sheetPrefs.${this.app.object.type}.tabs.${this.tab}`);
+    return game.user.getFlag("skjaald2", `sheetPrefs.${this.app.object.type}.tabs.${this.tab}`);
   }
 
   /**
@@ -36040,7 +36040,7 @@ class ItemListControlsElement extends HTMLElement {
   async _onToggleMode(event) {
     const { action } = event.currentTarget.dataset;
     const flag = `sheetPrefs.${this.app.object.type}.tabs.${this.tab}.${action}`;
-    const current = game.user.getFlag("skjaald", flag);
+    const current = game.user.getFlag("skjaald2", flag);
     let value;
     if ( action === "group" ) value = current === false;
     else if ( action === "sort" ) {
@@ -36793,7 +36793,7 @@ class EnchantmentConfig extends DocumentSheet {
     const effects = [];
     context.enchantments = [];
     for ( const effect of this.document.effects ) {
-      if ( effect.getFlag("skjaald", "type") !== "enchantment" ) effects.push(effect);
+      if ( effect.getFlag("skjaald2", "type") !== "enchantment" ) effects.push(effect);
       else if ( !effect.isAppliedEnchantment ) context.enchantments.push(effect);
     }
     context.enchantments = context.enchantments.map(effect => ({
@@ -36861,7 +36861,7 @@ class EnchantmentConfig extends DocumentSheet {
       return updates;
     });
     for ( const effect of this.document.effects ) {
-      if ( effect.getFlag("skjaald", "type") === "enchantment" ) continue;
+      if ( effect.getFlag("skjaald2", "type") === "enchantment" ) continue;
       if ( riderIds.has(effect.id) ) effectsChanges.push({ _id: effect.id, "flags.skjaald.rider": true });
       else effectsChanges.push({ _id: effect.id, "flags.skjaald.-=rider": null });
     }
@@ -38079,7 +38079,7 @@ class ItemSheet5e extends ItemSheet {
     let keepOrigin = false;
 
     // Validate against the enchantment's restraints on the origin item
-    if ( effect.getFlag("skjaald", "type") === "enchantment" ) {
+    if ( effect.getFlag("skjaald2", "type") === "enchantment" ) {
       const errors = effect.parent.system.enchantment?.canEnchant(this.item);
       if ( errors?.length ) {
         errors.forEach(err => ui.notifications.error(err.message));
@@ -39648,7 +39648,7 @@ class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   _onDelete(options, userId) {
     super._onDelete(options, userId);
 
-    const origin = this.actor?.getFlag("skjaald", "summon.origin");
+    const origin = this.actor?.getFlag("skjaald2", "summon.origin");
     // TODO: Replace with parseUuid once V11 support is dropped
     if ( origin ) SummonsData.untrackSummon(origin.split(".Item.")[0], this.actor.uuid);
   }
@@ -39715,7 +39715,7 @@ class TokenConfig5e extends TokenConfig {
     tokenTab.replaceChildren(...tab.children);
 
     let ringTab = document.createElement("div");
-    const flags = this.document.getFlag("skjaald", "tokenRing") ?? {};
+    const flags = this.document.getFlag("skjaald2", "tokenRing") ?? {};
     ringTab.innerHTML = await renderTemplate(this.constructor.dynamicRingTemplate, {
       flags: foundry.utils.mergeObject({ scaleCorrection: 1 }, flags, { inplace: false }),
       effects: Object.entries(CONFIG.SKJAALD.tokenRings.effects).reduce((obj, [key, label]) => {
@@ -40415,7 +40415,7 @@ class Token5e extends Token {
     if ( ("scaleCorrection" in dataFlag) && !shapeChange ) this.ring.configureUVs(dataFlag.scaleCorrection);
 
     // If we don't need a full redraw, we're just updating the visuals properties
-    const tokenRingFlag = this.document.getFlag("skjaald", "tokenRing") || {};
+    const tokenRingFlag = this.document.getFlag("skjaald2", "tokenRing") || {};
     this.ring.configureVisuals({...tokenRingFlag});
   }
 
@@ -40436,7 +40436,7 @@ class Token5e extends Token {
     if ( applicableEffects.includes(statusId) ) {
       if ( game.release.generation < 12 ) {
         if ( this.ring.enabled ) {
-          const tokenRingFlag = this.document.getFlag("skjaald", "tokenRing") || {};
+          const tokenRingFlag = this.document.getFlag("skjaald2", "tokenRing") || {};
           this.ring.configureVisuals(foundry.utils.deepClone(tokenRingFlag));
         }
       } else if ( this.hasDynamicRing ) this.renderFlags.set({refreshRingVisuals: true});
@@ -40552,7 +40552,7 @@ class TokenRing {
 
     // Configure token ring textures and visuals
     if ( this.enabled ) {
-      const tokenRingFlag = this.token.document.getFlag("skjaald", "tokenRing");
+      const tokenRingFlag = this.token.document.getFlag("skjaald2", "tokenRing");
       this._configureTexture({mesh, ...tokenRingFlag});
       this.configureVisuals({...tokenRingFlag});
     }
@@ -40671,7 +40671,7 @@ class TokenRing {
     if ( !this.enabled || Number.isNaN(color) ) return;
 
     const originalColor = Color.from(foundry.utils.mergeObject(
-      this.token.document.getFlag("skjaald", "tokenRing.colors") ?? {},
+      this.token.document.getFlag("skjaald2", "tokenRing.colors") ?? {},
       this.token.document.getRingColors(),
       { inplace: false }
     ).ring ?? 0xFFFFFF).littleEndian;
@@ -42297,7 +42297,7 @@ class ConsumableData extends ItemDataModel.mixin(
    * @returns {number}
    */
   get proficiencyMultiplier() {
-    const isProficient = this.parent?.actor?.getFlag("skjaald", "tavernBrawlerFeat");
+    const isProficient = this.parent?.actor?.getFlag("skjaald2", "tavernBrawlerFeat");
     return isProficient ? 1 : 0;
   }
 
@@ -43015,7 +43015,7 @@ class WeaponData extends ItemDataModel.mixin(
     const itemProf = config[this.type.value];
     const actorProfs = actor.system.traits?.weaponProf?.value ?? new Set();
     const natural = this.type.value === "natural";
-    const improvised = (this.type.value === "improv") && !!actor.getFlag("skjaald", "tavernBrawlerFeat");
+    const improvised = (this.type.value === "improv") && !!actor.getFlag("skjaald2", "tavernBrawlerFeat");
     const isProficient = natural || improvised || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
     return Number(isProficient);
   }
@@ -43155,7 +43155,7 @@ class MapLocationJournalPageData extends foundry.abstract.DataModel {
     if ( !this.code ) return;
     const style = foundry.utils.mergeObject(
       CONFIG.SKJAALD.mapLocationMarker.default,
-      CONFIG.SKJAALD.mapLocationMarker[this.parent.getFlag("skjaald", "mapMarkerStyle")] ?? {},
+      CONFIG.SKJAALD.mapLocationMarker[this.parent.getFlag("skjaald2", "mapMarkerStyle")] ?? {},
       {inplace: false}
     );
     return new MapLocationControlIcon({code: this.code, ...options, ...style});
@@ -44109,7 +44109,7 @@ class Combatant5e extends Combatant {
   refreshDynamicRing() {
     if ( !this.token?.hasDynamicRing ) return;
     if ( game.release.generation < 12 ) {
-      this.token.object?.ring.configureVisuals(foundry.utils.deepClone(this.token.getFlag("skjaald", "tokenRing") ?? {}));
+      this.token.object?.ring.configureVisuals(foundry.utils.deepClone(this.token.getFlag("skjaald2", "tokenRing") ?? {}));
     } else this.token.object?.renderFlags.set({refreshRingVisuals: true});
   }
 
