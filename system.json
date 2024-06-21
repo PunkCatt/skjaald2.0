@@ -24,7 +24,125 @@
         "skjaald.css"
     ],
     "packs": [
-
+        {
+            "name": "heroes",
+            "label": "Starter Heroes",
+            "system": "skjaald",
+            "path": "packs/heroes",
+            "type": "Actor",
+            "private": false,
+            "flags": {}
+        },
+        {
+            "name": "monsters",
+            "label": "Monsters (SRD)",
+            "system": "skjaald",
+            "path": "packs/monsters",
+            "type": "Actor",
+            "private": false,
+            "flags": {}
+        },
+        {
+            "name": "items",
+            "label": "Items (SRD)",
+            "system": "skjaald",
+            "path": "packs/items",
+            "type": "Item",
+            "private": false,
+            "flags": {}
+        },
+        {
+            "name": "tradegoods",
+            "label": "Trade Goods (SRD)",
+            "system": "skjaald",
+            "path": "packs/tradegoods",
+            "type": "Item",
+            "private": false,
+            "flags": {}
+        },
+        {
+            "name": "spells",
+            "label": "Spells (SRD)",
+            "system": "skjaald",
+            "path": "packs/spells",
+            "type": "Item",
+            "private": false,
+            "flags": {}
+        },
+        {
+            "name": "backgrounds",
+            "label": "Backgrounds (SRD)",
+            "system": "skjaald",
+            "path": "packs/backgrounds",
+            "type": "Item",
+            "private": false,
+            "flags": {}
+        },
+        {
+            "name": "classes",
+            "label": "Classes (SRD)",
+            "system": "skjaald",
+            "path": "packs/classes",
+            "type": "Item",
+            "private": false,
+            "flags": {}
+        },
+        {
+            "name": "subclasses",
+            "label": "Subclasses (SRD)",
+            "system": "skjaald",
+            "path": "packs/subclasses",
+            "type": "Item",
+            "private": false,
+            "flags": {}
+        },
+        {
+            "name": "classfeatures",
+            "label": "Class & Subclass Features (SRD)",
+            "system": "skjaald",
+            "path": "packs/classfeatures",
+            "type": "Item",
+            "private": false,
+            "flags": {}
+        },
+        {
+            "name": "races",
+            "label": "Races (SRD)",
+            "system": "skjaald",
+            "path": "packs/races",
+            "type": "Item",
+            "private": false,
+            "flags": {}
+        },
+        {
+            "name": "monsterfeatures",
+            "label": "Monster Features (SRD)",
+            "system": "skjaald",
+            "path": "packs/monsterfeatures",
+            "type": "Item",
+            "private": false,
+            "flags": {}
+        },
+        {
+            "name": "rules",
+            "label": "Rules (SRD)",
+            "system": "skjaald",
+            "path": "packs/rules",
+            "type": "JournalEntry",
+            "private": false,
+            "flags": {
+                "display": "table-of-contents"
+            }
+        },
+        {
+            "name": "tables",
+            "label": "Tables (SRD)",
+            "system": "skjaald",
+            "path": "packs/tables",
+            "type": "RollTable",
+            "private": false,
+            "flags": {}
+        }
     ],
     "packFolders": [
         {
