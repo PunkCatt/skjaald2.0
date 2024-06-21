@@ -4295,7 +4295,7 @@ var SystemFlagsMixin = Base => class extends Base {
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    if ( ("skjaald" in this.flags) && this._systemFlagsDataModel ) {
+    if ( ("skjaald2" in this.flags) && this._systemFlagsDataModel ) {
       this.flags.skjaald = new this._systemFlagsDataModel(this._source.flags.skjaald, { parent: this });
     }
   }
@@ -4304,7 +4304,7 @@ var SystemFlagsMixin = Base => class extends Base {
 
   /** @inheritDoc */
   async setFlag(scope, key, value) {
-    if ( (scope === "skjaald") && this._systemFlagsDataModel ) {
+    if ( (scope === "skjaald2") && this._systemFlagsDataModel ) {
       let diff;
       const changes = foundry.utils.expandObject({ [key]: value });
       if ( this.flags.skjaald ) diff = this.flags.skjaald.updateSource(changes, { dryRun: true });
@@ -6893,9 +6893,9 @@ class ActiveEffect5e extends ActiveEffect {
    * @returns {Promise<ActiveEffect5e>}
    */
   addDependent(...dependent) {
-    const dependents = this.getFlag("skjaald", "dependents") ?? [];
+    const dependents = this.getFlag("skjaald2", "dependents") ?? [];
     dependents.push(...dependent.map(d => ({ uuid: d.uuid })));
-    return this.setFlag("skjaald", "dependents", dependents);
+    return this.setFlag("skjaald2", "dependents", dependents);
   }
 
   /* -------------------------------------------- */
@@ -14372,7 +14372,7 @@ class Item5e extends SystemDocumentMixin(Item) {
       });
       if ( result === null ) return;
       foundry.utils.mergeObject(config, result);
-      await game.user.setFlag("skjaald", "creation.scrollExplanation", config.explanation);
+      await game.user.setFlag("skjaald2", "creation.scrollExplanation", config.explanation);
     }
 
     // Get spell data
@@ -14748,7 +14748,7 @@ class Award extends DialogMixin(FormApplication) {
    */
   _saveDestinations(destinations) {
     const target = this.isPartyAward ? this.object : game.user;
-    target.setFlag("skjaald", "awardDestinations", destinations);
+    target.setFlag("skjaald2", "awardDestinations", destinations);
   }
 
   /* -------------------------------------------- */
@@ -20533,9 +20533,9 @@ class Actor5e extends SystemDocumentMixin(Actor) {
         parent: canvas.scene, keepId: true, render: true
       });
       if ( isOriginalActor ) {
-        await this.unsetFlag("skjaald", "isPolymorphed");
-        await this.unsetFlag("skjaald", "previousActorIds");
-        await this.token.unsetFlag("skjaald", "previousActorData");
+        await this.unsetFlag("skjaald2", "isPolymorphed");
+        await this.unsetFlag("skjaald2", "previousActorIds");
+        await this.token.unsetFlag("skjaald2", "previousActorData");
       }
       if ( isRendered && renderSheet ) token.actor?.sheet?.render(true);
       return token;
@@ -20565,8 +20565,8 @@ class Actor5e extends SystemDocumentMixin(Actor) {
       await canvas.scene.updateEmbeddedDocuments("Token", tokenUpdates, { diff: false, recursive: false });
     }
     if ( isOriginalActor ) {
-      await this.unsetFlag("skjaald", "isPolymorphed");
-      await this.unsetFlag("skjaald", "previousActorIds");
+      await this.unsetFlag("skjaald2", "isPolymorphed");
+      await this.unsetFlag("skjaald2", "previousActorIds");
     }
 
     // Delete the polymorphed version(s) of the actor, if possible
@@ -32470,7 +32470,7 @@ class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
   _onToggleSidebar() {
     const collapsed = this._toggleSidebar();
     const activeTab = this._tabs?.[0]?.active ?? "details";
-    game.user.setFlag("skjaald", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`, collapsed);
+    game.user.setFlag("skjaald2", `sheetPrefs.character.tabs.${activeTab}.collapseSidebar`, collapsed);
   }
 
   /* -------------------------------------------- */
@@ -32704,7 +32704,7 @@ class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
     super._onResize(event);
     const { width, height } = this.position;
     const key = `character${this.actor.limited ? ":limited": ""}`;
-    game.user.setFlag("skjaald", `sheetPrefs.${key}`, { width, height });
+    game.user.setFlag("skjaald2", `sheetPrefs.${key}`, { width, height });
   }
 
   /* -------------------------------------------- */
@@ -36048,7 +36048,7 @@ class ItemListControlsElement extends HTMLElement {
       const index = values.indexOf(current);
       value = values[index + 1] ?? values[0];
     }
-    await game.user.setFlag("skjaald", flag, value);
+    await game.user.setFlag("skjaald2", flag, value);
     if ( action === "group" ) {
       this._initGrouping();
       this._applyGrouping();
