@@ -6213,7 +6213,7 @@ class ActiveEffect5e extends ActiveEffect {
    * @type {boolean}
    */
   get isAppliedEnchantment() {
-    return (this.getFlag("skjaald", "type") === "enchantment")
+    return (this.getFlag("skjaald2", "type") === "enchantment")
       && !!this.origin && (this.origin !== this.parent.uuid);
   }
 
@@ -6480,7 +6480,7 @@ class ActiveEffect5e extends ActiveEffect {
    */
   determineSuppression() {
     this.isSuppressed = false;
-    if ( this.getFlag("skjaald", "type") === "enchantment" ) return;
+    if ( this.getFlag("skjaald2", "type") === "enchantment" ) return;
     if ( this.parent instanceof skjaald.documents.Item5e ) this.isSuppressed = this.parent.areEffectsSuppressed;
   }
 
@@ -6521,7 +6521,7 @@ class ActiveEffect5e extends ActiveEffect {
    */
   _prepareExhaustionLevel() {
     const config = CONFIG.SKJAALD.conditionTypes.exhaustion;
-    let level = this.getFlag("skjaald", "exhaustionLevel");
+    let level = this.getFlag("skjaald2", "exhaustionLevel");
     if ( !Number.isFinite(level) ) level = 1;
     // TODO: Remove when v11 support is dropped.
     if ( game.release.version < 12 ) this.icon = this.constructor._getExhaustionImage(level);
@@ -6581,7 +6581,7 @@ class ActiveEffect5e extends ActiveEffect {
     const origin = await fromUuid(this.origin);
 
     // Create Effects
-    const riderEffects = (this.getFlag("skjaald", "enchantment.riders.effect") ?? []).map(id => {
+    const riderEffects = (this.getFlag("skjaald2", "enchantment.riders.effect") ?? []).map(id => {
       const effectData = origin.effects.get(id)?.toObject();
       if ( effectData ) {
         delete effectData._id;
@@ -6595,7 +6595,7 @@ class ActiveEffect5e extends ActiveEffect {
     // Create Items
     let createdItems = [];
     if ( this.parent.isEmbedded ) {
-      const riderItems = await Promise.all((this.getFlag("skjaald", "enchantment.riders.item") ?? []).map(async uuid => {
+      const riderItems = await Promise.all((this.getFlag("skjaald2", "enchantment.riders.item") ?? []).map(async uuid => {
         const itemData = (await fromUuid(uuid))?.toObject();
         if ( itemData ) {
           delete itemData._id;
@@ -6619,7 +6619,7 @@ class ActiveEffect5e extends ActiveEffect {
     if ( options.keepOrigin === false ) this.updateSource({ origin: this.parent.uuid });
 
     // Enchantments cannot be added directly to actors
-    if ( (this.getFlag("skjaald", "type") === "enchantment") && (this.parent instanceof Actor) ) {
+    if ( (this.getFlag("skjaald2", "type") === "enchantment") && (this.parent instanceof Actor) ) {
       ui.notifications.error("SKJAALD.Enchantment.Warning.NotOnActor", { localize: true });
       return false;
     }
@@ -6905,7 +6905,7 @@ class ActiveEffect5e extends ActiveEffect {
    * @returns {Array<ActiveEffect5e|Item5e>}
    */
   getDependents() {
-    return (this.getFlag("skjaald", "dependents") || []).reduce((arr, { uuid }) => {
+    return (this.getFlag("skjaald2", "dependents") || []).reduce((arr, { uuid }) => {
       const effect = fromUuidSync(uuid);
       if ( effect ) arr.push(effect);
       return arr;
@@ -6945,7 +6945,7 @@ class ActiveEffect5e extends ActiveEffect {
     else if ( this.disabled ) properties.push("SKJAALD.EffectType.Inactive");
     else if ( this.isTemporary ) properties.push("SKJAALD.EffectType.Temporary");
     else properties.push("SKJAALD.EffectType.Passive");
-    if ( this.getFlag("skjaald", "type") === "enchantment" ) properties.push("SKJAALD.Enchantment.Label");
+    if ( this.getFlag("skjaald2", "type") === "enchantment" ) properties.push("SKJAALD.Enchantment.Label");
 
     return {
       content: await renderTemplate(
@@ -13251,7 +13251,7 @@ class Item5e extends SystemDocumentMixin(Item) {
     // Fetch level from tags if not specified
     let originalLevel = this.system.level;
     let scaling = this.system.scaling;
-    const levelingFlag = this.getFlag("skjaald", "spellLevel");
+    const levelingFlag = this.getFlag("skjaald2", "spellLevel");
     if ( !spellLevel && levelingFlag ) {
       spellLevel = levelingFlag.value;
       originalLevel = levelingFlag.base;
@@ -17499,7 +17499,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {boolean}
    */
   get isPolymorphed() {
-    return this.getFlag("skjaald", "isPolymorphed") || false;
+    return this.getFlag("skjaald2", "isPolymorphed") || false;
   }
 
   /* -------------------------------------------- */
@@ -17632,7 +17632,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   prepareDerivedData() {
-    const origin = this.getFlag("skjaald", "summon.origin");
+    const origin = this.getFlag("skjaald2", "summon.origin");
     // TODO: Replace with parseUuid once V11 support is dropped
     if ( origin && this.token?.id ) SummonsData.trackSummon(origin.split(".Item.")[0], this.uuid);
 
@@ -18676,7 +18676,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
    * @private
    */
   _isRemarkableAthlete(ability) {
-    return this.getFlag("skjaald", "remarkableAthlete")
+    return this.getFlag("skjaald2", "remarkableAthlete")
       && CONFIG.SKJAALD.characterFlags.remarkableAthlete.abilities.includes(ability);
   }
 
@@ -18732,7 +18732,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Reliable Talent applies to any skill check we have full or better proficiency in
-    const reliableTalent = (skl.value >= 1 && this.getFlag("skjaald", "reliableTalent"));
+    const reliableTalent = (skl.value >= 1 && this.getFlag("skjaald2", "reliableTalent"));
 
     // Roll and return
     const flavor = game.i18n.format("SKJAALD.SkillPromptTitle", {skill: CONFIG.SKJAALD.skills[skillId]?.label ?? ""});
@@ -18741,7 +18741,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
       title: `${flavor}: ${this.name}`,
       flavor,
       chooseModifier: true,
-      halflingLucky: this.getFlag("skjaald", "halflingLucky"),
+      halflingLucky: this.getFlag("skjaald2", "halflingLucky"),
       reliableTalent,
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
@@ -18824,14 +18824,14 @@ class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Reliable Talent applies to any tool check we have full or better proficiency in
-    const reliableTalent = (prof?.multiplier >= 1 && this.getFlag("skjaald", "reliableTalent"));
+    const reliableTalent = (prof?.multiplier >= 1 && this.getFlag("skjaald2", "reliableTalent"));
 
     const flavor = game.i18n.format("SKJAALD.ToolPromptTitle", {tool: keyLabel(toolId, {trait: "tool"}) ?? ""});
     const rollData = foundry.utils.mergeObject({
       data, flavor,
       title: `${flavor}: ${this.name}`,
       chooseModifier: true,
-      halflingLucky: this.getFlag("skjaald", "halflingLucky"),
+      halflingLucky: this.getFlag("skjaald2", "halflingLucky"),
       reliableTalent,
       messageData: {
         speaker: options.speaker || ChatMessage.implementation.getSpeaker({actor: this}),
@@ -18937,7 +18937,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("skjaald", "halflingLucky"),
+      halflingLucky: this.getFlag("skjaald2", "halflingLucky"),
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.skjaald.roll": {type: "ability", abilityId }
@@ -19016,7 +19016,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("skjaald", "halflingLucky"),
+      halflingLucky: this.getFlag("skjaald2", "halflingLucky"),
       messageData: {
         speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
         "flags.skjaald.roll": {type: "save", abilityId }
@@ -19074,7 +19074,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
     const data = this.getRollData();
 
     // Diamond Soul adds proficiency
-    if ( this.getFlag("skjaald", "diamondSoul") ) {
+    if ( this.getFlag("skjaald2", "diamondSoul") ) {
       parts.push("@prof");
       data.prof = new Proficiency(this.system.attributes.prof, 1).term;
     }
@@ -19091,7 +19091,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
       data,
       title: `${flavor}: ${this.name}`,
       flavor,
-      halflingLucky: this.getFlag("skjaald", "halflingLucky"),
+      halflingLucky: this.getFlag("skjaald2", "halflingLucky"),
       targetValue: 10,
       messageData: {
         speaker: speaker,
@@ -20410,7 +20410,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
     d.flags.skjaald.isPolymorphed = true;
 
     // Gather previous actor data
-    const previousActorIds = this.getFlag("skjaald", "previousActorIds") || [];
+    const previousActorIds = this.getFlag("skjaald2", "previousActorIds") || [];
     previousActorIds.push(this._id);
     foundry.utils.setProperty(d.flags, "skjaald.previousActorIds", previousActorIds);
 
@@ -20491,19 +20491,19 @@ class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {object} [options]
      */
     Hooks.callAll("skjaald.revertOriginalForm", this, {renderSheet});
-    const previousActorIds = this.getFlag("skjaald", "previousActorIds") ?? [];
+    const previousActorIds = this.getFlag("skjaald2", "previousActorIds") ?? [];
     const isOriginalActor = !previousActorIds.length;
     const isRendered = this.sheet.rendered;
 
     // Obtain a reference to the original actor
-    const original = game.actors.get(this.getFlag("skjaald", "originalActor"));
+    const original = game.actors.get(this.getFlag("skjaald2", "originalActor"));
 
     // If we are reverting an unlinked token, grab the previous actorData, and create a new token
     if ( this.isToken ) {
       const baseActor = original ? original : game.actors.get(this.token.actorId);
       if ( !baseActor ) {
         ui.notifications.warn(game.i18n.format("SKJAALD.PolymorphRevertNoOriginalActorWarn", {
-          reference: this.getFlag("skjaald", "originalActor")
+          reference: this.getFlag("skjaald2", "originalActor")
         }));
         return;
       }
@@ -20543,7 +20543,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( !original ) {
       ui.notifications.warn(game.i18n.format("SKJAALD.PolymorphRevertNoOriginalActorWarn", {
-        reference: this.getFlag("skjaald", "originalActor")
+        reference: this.getFlag("skjaald2", "originalActor")
       }));
       return;
     }
@@ -20723,7 +20723,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
   _onDelete(options, userId) {
     super._onDelete(options, userId);
 
-    const origin = this.getFlag("skjaald", "summon.origin");
+    const origin = this.getFlag("skjaald2", "summon.origin");
     // TODO: Replace with parseUuid once V11 support is dropped
     if ( origin ) SummonsData.untrackSummon(origin.split(".Item.")[0], this.uuid);
   }
@@ -39397,7 +39397,7 @@ class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @type {boolean}
    */
   get hasDynamicRing() {
-    if ( game.release.generation < 12 ) return !!this.getFlag("skjaald", "tokenRing.enabled");
+    if ( game.release.generation < 12 ) return !!this.getFlag("skjaald2", "tokenRing.enabled");
     return this.ring.enabled;
   }
 
@@ -39411,7 +39411,7 @@ class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    */
   get subjectPath() {
     if ( game.release.generation >= 12 ) return this.ring.subject.texture;
-    const subject = this.getFlag("skjaald", "tokenRing")?.textures?.subject;
+    const subject = this.getFlag("skjaald2", "tokenRing")?.textures?.subject;
     if ( subject ) return subject;
     this.#subjectPath ??= this.constructor.inferSubjectPath(this.texture.src);
     return this.#subjectPath;
@@ -43453,8 +43453,8 @@ class ChatMessage5e extends ChatMessage {
         };
         optionallyHide('button[data-action="summon"]', !SummonsData.canSummon);
         optionallyHide('button[data-action="placeTemplate"]', !game.user.can("TEMPLATE_CREATE"));
-        optionallyHide('button[data-action="consumeUsage"]', this.getFlag("skjaald", "use.consumedUsage"));
-        optionallyHide('button[data-action="consumeResource"]', this.getFlag("skjaald", "use.consumedResource"));
+        optionallyHide('button[data-action="consumeUsage"]', this.getFlag("skjaald2", "use.consumedUsage"));
+        optionallyHide('button[data-action="consumeResource"]', this.getFlag("skjaald2", "use.consumedResource"));
         return;
       }
 
@@ -43476,7 +43476,7 @@ class ChatMessage5e extends ChatMessage {
    */
   _highlightCriticalSuccessFailure(html) {
     if ( !this.isContentVisible || !this.rolls.length ) return;
-    const originatingMessage = game.messages.get(this.getFlag("skjaald", "originatingMessage")) ?? this;
+    const originatingMessage = game.messages.get(this.getFlag("skjaald2", "originatingMessage")) ?? this;
     const displayChallenge = originatingMessage?.shouldDisplayChallenge;
 
     // Highlight rolls where the first part is a d20 roll
@@ -43776,11 +43776,11 @@ class ChatMessage5e extends ChatMessage {
    * @protected
    */
   _enrichEnchantmentTooltip(html) {
-    const enchantmentProfile = this.getFlag("skjaald", "use.enchantmentProfile");
+    const enchantmentProfile = this.getFlag("skjaald2", "use.enchantmentProfile");
     if ( !enchantmentProfile ) return;
 
     // Ensure concentration is still being maintained
-    const concentrationId = this.getFlag("skjaald", "use.concentrationId");
+    const concentrationId = this.getFlag("skjaald2", "use.concentrationId");
     if ( concentrationId && !this.getAssociatedActor()?.effects.get(concentrationId) ) return;
 
     // Create the enchantment tray
@@ -44039,10 +44039,10 @@ class ChatMessage5e extends ChatMessage {
   getAssociatedItem() {
     const actor = this.getAssociatedActor();
     if ( !actor ) return;
-    const storedData = this.getFlag("skjaald", "itemData");
+    const storedData = this.getFlag("skjaald2", "itemData");
     return storedData
       ? new Item.implementation(storedData, { parent: actor })
-      : actor.items.get(this.getFlag("skjaald", "use.itemId"));
+      : actor.items.get(this.getFlag("skjaald2", "use.itemId"));
   }
 }
 
