@@ -43642,7 +43642,7 @@ class ChatMessage5e extends ChatMessage {
    */
   _enrichAttackTargets(html) {
     const attackRoll = this.rolls[0];
-    const targets = this.getFlag("skjaald", "targets");
+    const targets = this.getFlag("skjaald2", "targets");
     if ( !game.user.isGM || !(attackRoll instanceof skjaald.dice.D20Roll) || !targets?.length ) return;
     const evaluation = document.createElement("ul");
     evaluation.classList.add("skjaald2", "evaluation");
