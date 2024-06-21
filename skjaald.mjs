@@ -36,7 +36,7 @@ class AdvancementConfig extends FormApplication {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "advancement", "dialog"],
-      template: "systems/skjaald/templates/advancement/advancement-config.hbs",
+      template: "systems/skjaald2/templates/advancement/advancement-config.hbs",
       width: 400,
       height: "auto",
       submitOnChange: true,
@@ -285,7 +285,7 @@ class AdvancementFlow extends FormApplication {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/skjaald/templates/advancement/advancement-flow.hbs",
+      template: "systems/skjaald2/templates/advancement/advancement-flow.hbs",
       popOut: false
     });
   }
@@ -840,7 +840,7 @@ class ItemDataModel extends SystemDataModel {
    * The handlebars template for rendering item tooltips.
    * @type {string}
    */
-  static ITEM_TOOLTIP_TEMPLATE = "systems/skjaald/templates/items/parts/item-tooltip.hbs";
+  static ITEM_TOOLTIP_TEMPLATE = "systems/skjaald2/templates/items/parts/item-tooltip.hbs";
 
   /* -------------------------------------------- */
   /*  Data Preparation                            */
@@ -1820,7 +1820,7 @@ class AbilityScoreImprovementConfig extends AdvancementConfig {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/skjaald/templates/advancement/ability-score-improvement-config.hbs"
+      template: "systems/skjaald2/templates/advancement/ability-score-improvement-config.hbs"
     });
   }
 
@@ -1907,7 +1907,7 @@ class AbilityScoreImprovementFlow extends AdvancementFlow {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: "form" }],
-      template: "systems/skjaald/templates/advancement/ability-score-improvement-flow.hbs"
+      template: "systems/skjaald2/templates/advancement/ability-score-improvement-flow.hbs"
     });
   }
 
@@ -2162,7 +2162,7 @@ class AbilityScoreImprovementAdvancement extends Advancement {
         value: AbilityScoreImprovementValueData
       },
       order: 20,
-      icon: "systems/skjaald/icons/svg/ability-score-improvement.svg",
+      icon: "systems/skjaald2/icons/svg/ability-score-improvement.svg",
       title: game.i18n.localize("SKJAALD.AdvancementAbilityScoreImprovementTitle"),
       hint: game.i18n.localize("SKJAALD.AdvancementAbilityScoreImprovementHint"),
       apps: {
@@ -2353,7 +2353,7 @@ class HitPointsConfig extends AdvancementConfig {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/skjaald/templates/advancement/hit-points-config.hbs"
+      template: "systems/skjaald2/templates/advancement/hit-points-config.hbs"
     });
   }
 
@@ -2375,7 +2375,7 @@ class HitPointsFlow extends AdvancementFlow {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/skjaald/templates/advancement/hit-points-flow.hbs"
+      template: "systems/skjaald2/templates/advancement/hit-points-flow.hbs"
     });
   }
 
@@ -2745,42 +2745,42 @@ const validators = {
 async function preloadHandlebarsTemplates() {
   const partials = [
     // Shared Partials
-    "systems/skjaald/templates/shared/active-effects.hbs",
-    "systems/skjaald/templates/shared/inventory.hbs",
-    "systems/skjaald/templates/shared/inventory2.hbs",
-    "systems/skjaald/templates/shared/active-effects2.hbs",
-    "systems/skjaald/templates/apps/parts/trait-list.hbs",
+    "systems/skjaald2/templates/shared/active-effects.hbs",
+    "systems/skjaald2/templates/shared/inventory.hbs",
+    "systems/skjaald2/templates/shared/inventory2.hbs",
+    "systems/skjaald2/templates/shared/active-effects2.hbs",
+    "systems/skjaald2/templates/apps/parts/trait-list.hbs",
 
     // Actor Sheet Partials
-    "systems/skjaald/templates/actors/parts/actor-traits.hbs",
-    "systems/skjaald/templates/actors/parts/actor-inventory.hbs",
-    "systems/skjaald/templates/actors/parts/actor-features.hbs",
-    "systems/skjaald/templates/actors/parts/actor-spellbook.hbs",
-    "systems/skjaald/templates/actors/parts/actor-warnings.hbs",
-    "systems/skjaald/templates/actors/tabs/character-details.hbs",
-    "systems/skjaald/templates/actors/tabs/character-features.hbs",
-    "systems/skjaald/templates/actors/tabs/character-spells.hbs",
-    "systems/skjaald/templates/actors/tabs/character-biography.hbs",
-    "systems/skjaald/templates/actors/tabs/group-members.hbs",
+    "systems/skjaald2/templates/actors/parts/actor-traits.hbs",
+    "systems/skjaald2/templates/actors/parts/actor-inventory.hbs",
+    "systems/skjaald2/templates/actors/parts/actor-features.hbs",
+    "systems/skjaald2/templates/actors/parts/actor-spellbook.hbs",
+    "systems/skjaald2/templates/actors/parts/actor-warnings.hbs",
+    "systems/skjaald2/templates/actors/tabs/character-details.hbs",
+    "systems/skjaald2/templates/actors/tabs/character-features.hbs",
+    "systems/skjaald2/templates/actors/tabs/character-spells.hbs",
+    "systems/skjaald2/templates/actors/tabs/character-biography.hbs",
+    "systems/skjaald2/templates/actors/tabs/group-members.hbs",
 
     // Item Sheet Partials
-    "systems/skjaald/templates/items/parts/item-action.hbs",
-    "systems/skjaald/templates/items/parts/item-activation.hbs",
-    "systems/skjaald/templates/items/parts/item-advancement.hbs",
-    "systems/skjaald/templates/items/parts/item-description.hbs",
-    "systems/skjaald/templates/items/parts/item-mountable.hbs",
-    "systems/skjaald/templates/items/parts/item-spellcasting.hbs",
-    "systems/skjaald/templates/items/parts/item-source.hbs",
-    "systems/skjaald/templates/items/parts/item-summary.hbs",
-    "systems/skjaald/templates/items/parts/item-tooltip.hbs",
+    "systems/skjaald2/templates/items/parts/item-action.hbs",
+    "systems/skjaald2/templates/items/parts/item-activation.hbs",
+    "systems/skjaald2/templates/items/parts/item-advancement.hbs",
+    "systems/skjaald2/templates/items/parts/item-description.hbs",
+    "systems/skjaald2/templates/items/parts/item-mountable.hbs",
+    "systems/skjaald2/templates/items/parts/item-spellcasting.hbs",
+    "systems/skjaald2/templates/items/parts/item-source.hbs",
+    "systems/skjaald2/templates/items/parts/item-summary.hbs",
+    "systems/skjaald2/templates/items/parts/item-tooltip.hbs",
 
     // Journal Partials
-    "systems/skjaald/templates/journal/parts/journal-table.hbs",
+    "systems/skjaald2/templates/journal/parts/journal-table.hbs",
 
     // Advancement Partials
-    "systems/skjaald/templates/advancement/parts/advancement-ability-score-control.hbs",
-    "systems/skjaald/templates/advancement/parts/advancement-controls.hbs",
-    "systems/skjaald/templates/advancement/parts/advancement-spell-config.hbs"
+    "systems/skjaald2/templates/advancement/parts/advancement-ability-score-control.hbs",
+    "systems/skjaald2/templates/advancement/parts/advancement-controls.hbs",
+    "systems/skjaald2/templates/advancement/parts/advancement-spell-config.hbs"
   ];
 
   const paths = {};
@@ -3204,7 +3204,7 @@ class HitPointsAdvancement extends Advancement {
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       order: 10,
-      icon: "systems/skjaald/icons/svg/hit-points.svg",
+      icon: "systems/skjaald2/icons/svg/hit-points.svg",
       title: game.i18n.localize("SKJAALD.AdvancementHitPointsTitle"),
       hint: game.i18n.localize("SKJAALD.AdvancementHitPointsHint"),
       multiLevel: true,
@@ -3385,7 +3385,7 @@ class ItemChoiceConfig extends AdvancementConfig {
       classes: ["skjaald", "advancement", "item-choice", "three-column"],
       dragDrop: [{ dropSelector: ".drop-target" }],
       dropKeyPath: "pool",
-      template: "systems/skjaald/templates/advancement/item-choice-config.hbs",
+      template: "systems/skjaald2/templates/advancement/item-choice-config.hbs",
       width: 780
     });
   }
@@ -4720,7 +4720,7 @@ class ShortRestDialog extends Dialog {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/skjaald/templates/apps/short-rest.hbs",
+      template: "systems/skjaald2/templates/apps/short-rest.hbs",
       classes: ["skjaald", "dialog"],
       height: "auto"
     });
@@ -4834,7 +4834,7 @@ class LongRestDialog extends Dialog {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/skjaald/templates/apps/long-rest.hbs",
+      template: "systems/skjaald2/templates/apps/long-rest.hbs",
       classes: ["skjaald", "dialog"]
     });
   }
@@ -4920,7 +4920,7 @@ class PropertyAttribution extends Application {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: "property-attribution",
       classes: ["skjaald", "property-attribution"],
-      template: "systems/skjaald/templates/apps/property-attribution.hbs",
+      template: "systems/skjaald2/templates/apps/property-attribution.hbs",
       width: 320,
       height: "auto"
     });
@@ -6949,7 +6949,7 @@ class ActiveEffect5e extends ActiveEffect {
 
     return {
       content: await renderTemplate(
-        "systems/skjaald/templates/effects/parts/effect-tooltip.hbs", {
+        "systems/skjaald2/templates/effects/parts/effect-tooltip.hbs", {
           effect: this,
           description: await TextEditor.enrichHTML(this.description ?? "", {
             async: true, relativeTo: this, ...enrichmentOptions
@@ -7025,7 +7025,7 @@ class AdvancementManager extends Application {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "advancement", "flow"],
-      template: "systems/skjaald/templates/advancement/advancement-manager.hbs",
+      template: "systems/skjaald2/templates/advancement/advancement-manager.hbs",
       width: 460,
       height: "auto"
     });
@@ -7671,7 +7671,7 @@ class AdvancementConfirmationDialog extends Dialog {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/skjaald/templates/advancement/advancement-confirmation-dialog.hbs",
+      template: "systems/skjaald2/templates/advancement/advancement-confirmation-dialog.hbs",
       jQuery: false
     });
   }
@@ -7805,7 +7805,7 @@ class TraitConfig extends AdvancementConfig {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "advancement", "traits", "two-column"],
-      template: "systems/skjaald/templates/advancement/trait-config.hbs",
+      template: "systems/skjaald2/templates/advancement/trait-config.hbs",
       width: 640
     });
   }
@@ -7996,7 +7996,7 @@ class TraitFlow extends AdvancementFlow {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/skjaald/templates/advancement/trait-flow.hbs"
+      template: "systems/skjaald2/templates/advancement/trait-flow.hbs"
     });
   }
 
@@ -8184,7 +8184,7 @@ class TraitAdvancement extends Advancement {
         value: TraitValueData
       },
       order: 30,
-      icon: "systems/skjaald/icons/svg/trait.svg",
+      icon: "systems/skjaald2/icons/svg/trait.svg",
       title: game.i18n.localize("SKJAALD.AdvancementTraitTitle"),
       hint: game.i18n.localize("SKJAALD.AdvancementTraitHint"),
       apps: {
@@ -11202,7 +11202,7 @@ class AbilityUseDialog extends Dialog {
     this._getAbilityUseWarnings(data, options);
 
     // Render the ability usage template
-    const html = await renderTemplate("systems/skjaald/templates/apps/ability-use.hbs", data);
+    const html = await renderTemplate("systems/skjaald2/templates/apps/ability-use.hbs", data);
 
     // Create the Dialog and return data as a Promise
     const isSpell = item.type === "spell";
@@ -13034,7 +13034,7 @@ class Item5e extends SystemDocumentMixin(Item) {
       consumeUsage,
       consumeResource
     };
-    const html = await renderTemplate("systems/skjaald/templates/chat/item-card.hbs", templateData);
+    const html = await renderTemplate("systems/skjaald2/templates/chat/item-card.hbs", templateData);
 
     // Create the ChatMessage data object
     const chatData = {
@@ -14360,7 +14360,7 @@ class Item5e extends SystemDocumentMixin(Item) {
       const result = await Dialog.prompt({
         title: game.i18n.format("SKJAALD.Scroll.CreateFrom", { spell: spell.name }),
         label: game.i18n.localize("SKJAALD.Scroll.CreateScroll"),
-        content: await renderTemplate("systems/skjaald/templates/apps/spell-scroll-dialog.hbs", {
+        content: await renderTemplate("systems/skjaald2/templates/apps/spell-scroll-dialog.hbs", {
           ...config, anchor, spellLevels: Object.entries(CONFIG.SKJAALD.spellLevels).reduce((obj, [k, v]) => {
             if ( Number(k) >= spell.system.level ) obj[k] = v;
             return obj;
@@ -14516,7 +14516,7 @@ class Item5e extends SystemDocumentMixin(Item) {
     const name = data.name || game.i18n.format("DOCUMENT.New", { type: label });
     let type = data.type || CONFIG[this.documentName]?.defaultType;
     if ( !types.includes(type) ) type = types[0];
-    const content = await renderTemplate("systems/skjaald/templates/apps/document-create.hbs", {
+    const content = await renderTemplate("systems/skjaald2/templates/apps/document-create.hbs", {
       folders, name, type,
       folder: data.folder,
       hasFolders: folders.length > 0,
@@ -14613,7 +14613,7 @@ class Award extends DialogMixin(FormApplication) {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald2", "award", "dialog"],
-      template: "systems/skjaald/templates/apps/award.hbs",
+      template: "systems/skjaald2/templates/apps/award.hbs",
       title: "SKJAALD.Award.Title",
       width: 350,
       height: "auto",
@@ -14683,7 +14683,7 @@ class Award extends DialogMixin(FormApplication) {
    */
   static prepareDestinations(destinations, savedDestinations) {
     const icons = {
-      container: '<skjaald-icon class="fa-fw" src="systems/skjaald/icons/svg/backpack.svg"></skjaald-icon>',
+      container: '<skjaald-icon class="fa-fw" src="systems/skjaald2/icons/svg/backpack.svg"></skjaald-icon>',
       group: '<i class="fa-solid fa-people-group"></i>',
       vehicle: '<i class="fa-solid fa-sailboat"></i>'
     };
@@ -15102,7 +15102,7 @@ class SpellsUnlinkedConfig extends DocumentSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "unlinked-spell-config"],
-      template: "systems/skjaald/templates/journal/page-spell-list-unlinked-config.hbs",
+      template: "systems/skjaald2/templates/journal/page-spell-list-unlinked-config.hbs",
       width: 400,
       height: "auto",
       sheetConfig: false
@@ -15194,8 +15194,8 @@ class JournalSpellListPageSheet extends JournalPageSheet {
 
   /** @inheritDoc */
   get template() {
-    if ( this.options.displayAsTable ) return "systems/skjaald/templates/journal/page-spell-list-table.hbs";
-    return `systems/skjaald/templates/journal/page-spell-list-${this.isEditable ? "edit" : "view"}.hbs`;
+    if ( this.options.displayAsTable ) return "systems/skjaald2/templates/journal/page-spell-list-table.hbs";
+    return `systems/skjaald2/templates/journal/page-spell-list-${this.isEditable ? "edit" : "view"}.hbs`;
   }
 
   /* -------------------------------------------- */
@@ -15540,7 +15540,7 @@ class D20Roll extends Roll {
    * The HTML template path used to configure evaluation of this Roll
    * @type {string}
    */
-  static EVALUATION_TEMPLATE = "systems/skjaald/templates/chat/roll-dialog.hbs";
+  static EVALUATION_TEMPLATE = "systems/skjaald2/templates/chat/roll-dialog.hbs";
 
   /* -------------------------------------------- */
 
@@ -15808,7 +15808,7 @@ class DamageRoll extends Roll {
    * The HTML template path used to configure evaluation of this Roll
    * @type {string}
    */
-  static EVALUATION_TEMPLATE = "systems/skjaald/templates/chat/roll-dialog.hbs";
+  static EVALUATION_TEMPLATE = "systems/skjaald2/templates/chat/roll-dialog.hbs";
 
   /* -------------------------------------------- */
 
@@ -17211,7 +17211,7 @@ function createRollLabel(config) {
     switch ( config.type ) {
       case "check":
       case "skill":
-        label = `<i class="skjaald-icon" data-src="systems/skjaald/icons/svg/ability-score-improvement.svg"></i>${label}`;
+        label = `<i class="skjaald-icon" data-src="systems/skjaald2/icons/svg/ability-score-improvement.svg"></i>${label}`;
         break;
       case "tool":
         label = `<i class="fas fa-hammer"></i>${label}`;
@@ -17358,7 +17358,7 @@ async function rollAction(event) {
     const MessageClass = getDocumentClass("ChatMessage");
     const chatData = {
       user: game.user.id,
-      content: await renderTemplate("systems/skjaald/templates/chat/request-card.hbs", {
+      content: await renderTemplate("systems/skjaald2/templates/chat/request-card.hbs", {
         buttonLabel: createRollLabel({ ...target.dataset, format: "short", icon: true }),
         hiddenLabel: createRollLabel({ ...target.dataset, format: "short", icon: true, hideDC: true }),
         dataset: { ...target.dataset, action: "rollRequest" }
@@ -18657,7 +18657,7 @@ class Actor5e extends SystemDocumentMixin(Actor) {
     };
 
     return ChatMessage.implementation.create({
-      content: await renderTemplate("systems/skjaald/templates/chat/request-card.hbs", {
+      content: await renderTemplate("systems/skjaald2/templates/chat/request-card.hbs", {
         dataset: { ...dataset, type: "concentration" },
         buttonLabel: createRollLabel({ ...dataset, ...config }),
         hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
@@ -20882,7 +20882,7 @@ class ItemGrantFlow extends AdvancementFlow {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/skjaald/templates/advancement/item-grant-flow.hbs"
+      template: "systems/skjaald2/templates/advancement/item-grant-flow.hbs"
     });
   }
 
@@ -21010,7 +21010,7 @@ class ItemChoiceFlow extends ItemGrantFlow {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: ".drop-target" }],
-      template: "systems/skjaald/templates/advancement/item-choice-flow.hbs"
+      template: "systems/skjaald2/templates/advancement/item-choice-flow.hbs"
     });
   }
 
@@ -21413,7 +21413,7 @@ class ItemGrantConfig extends AdvancementConfig {
       classes: ["skjaald", "advancement", "item-grant"],
       dragDrop: [{ dropSelector: ".drop-target" }],
       dropKeyPath: "items",
-      template: "systems/skjaald/templates/advancement/item-grant-config.hbs"
+      template: "systems/skjaald2/templates/advancement/item-grant-config.hbs"
     });
   }
 
@@ -21508,7 +21508,7 @@ class ItemGrantAdvancement extends Advancement {
         configuration: ItemGrantConfigurationData
       },
       order: 40,
-      icon: "systems/skjaald/icons/svg/item-grant.svg",
+      icon: "systems/skjaald2/icons/svg/item-grant.svg",
       title: game.i18n.localize("SKJAALD.AdvancementItemGrantTitle"),
       hint: game.i18n.localize("SKJAALD.AdvancementItemGrantHint"),
       apps: {
@@ -21664,7 +21664,7 @@ class ItemChoiceAdvancement extends ItemGrantAdvancement {
         value: ItemChoiceValueData
       },
       order: 50,
-      icon: "systems/skjaald/icons/svg/item-choice.svg",
+      icon: "systems/skjaald2/icons/svg/item-choice.svg",
       title: game.i18n.localize("SKJAALD.AdvancementItemChoiceTitle"),
       hint: game.i18n.localize("SKJAALD.AdvancementItemChoiceHint"),
       multiLevel: true,
@@ -22204,7 +22204,7 @@ class ScaleValueConfig extends AdvancementConfig {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "advancement", "scale-value", "two-column"],
-      template: "systems/skjaald/templates/advancement/scale-value-config.hbs",
+      template: "systems/skjaald2/templates/advancement/scale-value-config.hbs",
       width: 540
     });
   }
@@ -22374,7 +22374,7 @@ class ScaleValueFlow extends AdvancementFlow {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/skjaald/templates/advancement/scale-value-flow.hbs"
+      template: "systems/skjaald2/templates/advancement/scale-value-flow.hbs"
     });
   }
 
@@ -22401,7 +22401,7 @@ class ScaleValueAdvancement extends Advancement {
         configuration: ScaleValueConfigurationData
       },
       order: 60,
-      icon: "systems/skjaald/icons/svg/scale-value.svg",
+      icon: "systems/skjaald2/icons/svg/scale-value.svg",
       title: game.i18n.localize("SKJAALD.AdvancementScaleValueTitle"),
       hint: game.i18n.localize("SKJAALD.AdvancementScaleValueHint"),
       multiLevel: true,
@@ -22494,7 +22494,7 @@ class SizeConfig extends AdvancementConfig {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "advancement", "size"],
-      template: "systems/skjaald/templates/advancement/size-config.hbs"
+      template: "systems/skjaald2/templates/advancement/size-config.hbs"
     });
   }
 
@@ -22531,7 +22531,7 @@ class SizeFlow extends AdvancementFlow {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/skjaald/templates/advancement/size-flow.hbs"
+      template: "systems/skjaald2/templates/advancement/size-flow.hbs"
     });
   }
 
@@ -22592,7 +22592,7 @@ class SizeAdvancement extends Advancement {
         value: SizeValueData
       },
       order: 25,
-      icon: "systems/skjaald/icons/svg/size.svg",
+      icon: "systems/skjaald2/icons/svg/size.svg",
       title: game.i18n.localize("SKJAALD.AdvancementSizeTitle"),
       hint: game.i18n.localize("SKJAALD.AdvancementSizeHint"),
       apps: {
@@ -23992,7 +23992,7 @@ SKJAALD.itemProperties = {
   concentration: {
     label: "SKJAALD.Item.Property.Concentration",
     abbreviation: "SKJAALD.ConcentrationAbbr",
-    icon: "systems/skjaald/icons/svg/statuses/concentrating.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/concentrating.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ow58p27ctAnr4VPH",
     isTag: true
   },
@@ -24021,7 +24021,7 @@ SKJAALD.itemProperties = {
   },
   mgc: {
     label: "SKJAALD.Item.Property.Magical",
-    icon: "systems/skjaald/icons/svg/properties/magical.svg",
+    icon: "systems/skjaald2/icons/svg/properties/magical.svg",
     isPhysical: true
   },
   rch: {
@@ -24036,7 +24036,7 @@ SKJAALD.itemProperties = {
   ritual: {
     label: "SKJAALD.Item.Property.Ritual",
     abbreviation: "SKJAALD.RitualAbbr",
-    icon: "systems/skjaald/icons/svg/items/spell.svg",
+    icon: "systems/skjaald2/icons/svg/items/spell.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.FjWqT5iyJ89kohdA",
     isTag: true
   },
@@ -24236,82 +24236,82 @@ preLocalize("currencies", { keys: ["label", "abbreviation"] });
 SKJAALD.damageTypes = {
   acid: {
     label: "SKJAALD.DamageAcid",
-    icon: "systems/skjaald/icons/svg/damage/acid.svg",
+    icon: "systems/skjaald2/icons/svg/damage/acid.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.IQhbKRPe1vCPdh8v",
     color: new Color(0x839D50)
   },
   bludgeoning: {
     label: "SKJAALD.DamageBludgeoning",
-    icon: "systems/skjaald/icons/svg/damage/bludgeoning.svg",
+    icon: "systems/skjaald2/icons/svg/damage/bludgeoning.svg",
     isPhysical: true,
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.39LFrlef94JIYO8m",
     color: new Color(0x0000A0)
   },
   cold: {
     label: "SKJAALD.DamageCold",
-    icon: "systems/skjaald/icons/svg/damage/cold.svg",
+    icon: "systems/skjaald2/icons/svg/damage/cold.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.4xsFUooHDEdfhw6g",
     color: new Color(0xADD8E6)
   },
   fire: {
     label: "SKJAALD.DamageFire",
-    icon: "systems/skjaald/icons/svg/damage/fire.svg",
+    icon: "systems/skjaald2/icons/svg/damage/fire.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.f1S66aQJi4PmOng6",
     color: new Color(0xFF4500)
   },
   force: {
     label: "SKJAALD.DamageForce",
-    icon: "systems/skjaald/icons/svg/damage/force.svg",
+    icon: "systems/skjaald2/icons/svg/damage/force.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.eFTWzngD8dKWQuUR",
     color: new Color(0x800080)
   },
   lightning: {
     label: "SKJAALD.DamageLightning",
-    icon: "systems/skjaald/icons/svg/damage/lightning.svg",
+    icon: "systems/skjaald2/icons/svg/damage/lightning.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.9SaxFJ9bM3SutaMC",
     color: new Color(0x1E90FF)
   },
   necrotic: {
     label: "SKJAALD.DamageNecrotic",
-    icon: "systems/skjaald/icons/svg/damage/necrotic.svg",
+    icon: "systems/skjaald2/icons/svg/damage/necrotic.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.klOVUV5G1U7iaKoG",
     color: new Color(0x006400)
   },
   piercing: {
     label: "SKJAALD.DamagePiercing",
-    icon: "systems/skjaald/icons/svg/damage/piercing.svg",
+    icon: "systems/skjaald2/icons/svg/damage/piercing.svg",
     isPhysical: true,
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.95agSnEGTdAmKhyC",
     color: new Color(0xC0C0C0)
   },
   poison: {
     label: "SKJAALD.DamagePoison",
-    icon: "systems/skjaald/icons/svg/damage/poison.svg",
+    icon: "systems/skjaald2/icons/svg/damage/poison.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.k5wOYXdWPzcWwds1",
     color: new Color(0x8A2BE2)
   },
   psychic: {
     label: "SKJAALD.DamagePsychic",
-    icon: "systems/skjaald/icons/svg/damage/psychic.svg",
+    icon: "systems/skjaald2/icons/svg/damage/psychic.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.YIKbDv4zYqbE5teJ",
     color: new Color(0xFF1493)
   },
   radiant: {
     label: "SKJAALD.DamageRadiant",
-    icon: "systems/skjaald/icons/svg/damage/radiant.svg",
+    icon: "systems/skjaald2/icons/svg/damage/radiant.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.5tcK9buXWDOw8yHH",
     color: new Color(0xFFD700)
   },
   slashing: {
     label: "SKJAALD.DamageSlashing",
-    icon: "systems/skjaald/icons/svg/damage/slashing.svg",
+    icon: "systems/skjaald2/icons/svg/damage/slashing.svg",
     isPhysical: true,
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.sz2XKQ5lgsdPEJOa",
     color: new Color(0x8B0000)
   },
   thunder: {
     label: "SKJAALD.DamageThunder",
-    icon: "systems/skjaald/icons/svg/damage/thunder.svg",
+    icon: "systems/skjaald2/icons/svg/damage/thunder.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.iqsmMHk7FSpiNkQy",
     color: new Color(0x708090)
   }
@@ -24329,12 +24329,12 @@ preLocalize("damageTypes", { keys: ["label"], sort: true });
 SKJAALD.healingTypes = {
   healing: {
     label: "SKJAALD.Healing",
-    icon: "systems/skjaald/icons/svg/damage/healing.svg",
+    icon: "systems/skjaald2/icons/svg/damage/healing.svg",
     color: new Color(0x46C252)
   },
   temphp: {
     label: "SKJAALD.HealingTemp",
-    icon: "systems/skjaald/icons/svg/damage/temphp.svg",
+    icon: "systems/skjaald2/icons/svg/damage/temphp.svg",
     color: new Color(0x4B66DE)
   }
 };
@@ -24473,15 +24473,15 @@ SKJAALD.encumbrance = {
   effects: {
     encumbered: {
       name: "EFFECT.SKJAALD.StatusEncumbered",
-      icon: "systems/skjaald/icons/svg/statuses/encumbered.svg"
+      icon: "systems/skjaald2/icons/svg/statuses/encumbered.svg"
     },
     heavilyEncumbered: {
       name: "EFFECT.SKJAALD.StatusHeavilyEncumbered",
-      icon: "systems/skjaald/icons/svg/statuses/heavily-encumbered.svg"
+      icon: "systems/skjaald2/icons/svg/statuses/heavily-encumbered.svg"
     },
     exceedingCarryingCapacity: {
       name: "EFFECT.SKJAALD.StatusExceedingCarryingCapacity",
-      icon: "systems/skjaald/icons/svg/statuses/exceeding-carrying-capacity.svg"
+      icon: "systems/skjaald2/icons/svg/statuses/exceeding-carrying-capacity.svg"
     }
   },
   threshold: {
@@ -24810,7 +24810,7 @@ SKJAALD.spellUpcastModes = ["always", "pact", "prepared"];
 SKJAALD.spellcastingTypes = {
   leveled: {
     label: "SKJAALD.SpellProgLeveled",
-    img: "systems/skjaald/icons/spell-tiers/{id}.webp",
+    img: "systems/skjaald2/icons/spell-tiers/{id}.webp",
     progression: {
       full: {
         label: "SKJAALD.SpellProgFull",
@@ -24945,13 +24945,13 @@ SKJAALD.spellTags = {
   concentration: {
     label: "SKJAALD.Concentration",
     abbr: "SKJAALD.ConcentrationAbbr",
-    icon: "systems/skjaald/icons/svg/statuses/concentrating.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/concentrating.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ow58p27ctAnr4VPH"
   },
   ritual: {
     label: "SKJAALD.Ritual",
     abbr: "SKJAALD.RitualAbbr",
-    icon: "systems/skjaald/icons/svg/items/spell.svg",
+    icon: "systems/skjaald2/icons/svg/items/spell.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.FjWqT5iyJ89kohdA"
   }
 };
@@ -24976,49 +24976,49 @@ preLocalize("spellTags", { keys: ["label", "abbr"] });
 SKJAALD.spellSchools = {
   abj: {
     label: "SKJAALD.SchoolAbj",
-    icon: "systems/skjaald/icons/svg/schools/abjuration.svg",
+    icon: "systems/skjaald2/icons/svg/schools/abjuration.svg",
     fullKey: "abjuration",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.849AYEWw9FHD6JNz"
   },
   con: {
     label: "SKJAALD.SchoolCon",
-    icon: "systems/skjaald/icons/svg/schools/conjuration.svg",
+    icon: "systems/skjaald2/icons/svg/schools/conjuration.svg",
     fullKey: "conjuration",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.TWyKMhZJZGqQ6uls"
   },
   div: {
     label: "SKJAALD.SchoolDiv",
-    icon: "systems/skjaald/icons/svg/schools/divination.svg",
+    icon: "systems/skjaald2/icons/svg/schools/divination.svg",
     fullKey: "divination",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.HoD2MwzmVbMqj9se"
   },
   enc: {
     label: "SKJAALD.SchoolEnc",
-    icon: "systems/skjaald/icons/svg/schools/enchantment.svg",
+    icon: "systems/skjaald2/icons/svg/schools/enchantment.svg",
     fullKey: "enchantment",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.SehPXk24ySBVOwCZ"
   },
   evo: {
     label: "SKJAALD.SchoolEvo",
-    icon: "systems/skjaald/icons/svg/schools/evocation.svg",
+    icon: "systems/skjaald2/icons/svg/schools/evocation.svg",
     fullKey: "evocation",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.kGp1RNuxL2SELLRC"
   },
   ill: {
     label: "SKJAALD.SchoolIll",
-    icon: "systems/skjaald/icons/svg/schools/illusion.svg",
+    icon: "systems/skjaald2/icons/svg/schools/illusion.svg",
     fullKey: "illusion",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.smEk7kvVyslFozrB"
   },
   nec: {
     label: "SKJAALD.SchoolNec",
-    icon: "systems/skjaald/icons/svg/schools/necromancy.svg",
+    icon: "systems/skjaald2/icons/svg/schools/necromancy.svg",
     fullKey: "necromancy",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.W0eyiV1FBmngb6Qh"
   },
   trs: {
     label: "SKJAALD.SchoolTrs",
-    icon: "systems/skjaald/icons/svg/schools/transmutation.svg",
+    icon: "systems/skjaald2/icons/svg/schools/transmutation.svg",
     fullKey: "transmutation",
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.IYWewSailtmv6qEb"
   }
@@ -25267,113 +25267,113 @@ SKJAALD.consumableResources = [
 SKJAALD.conditionTypes = {
   bleeding: {
     label: "EFFECT.SKJAALD.StatusBleeding",
-    icon: "systems/skjaald/icons/svg/statuses/bleeding.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/bleeding.svg",
     pseudo: true
   },
   blinded: {
     label: "SKJAALD.ConBlinded",
-    icon: "systems/skjaald/icons/svg/statuses/blinded.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/blinded.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ",
     special: "BLIND"
   },
   charmed: {
     label: "SKJAALD.ConCharmed",
-    icon: "systems/skjaald/icons/svg/statuses/charmed.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/charmed.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.zZaEBrKkr66OWJvD"
   },
   cursed: {
     label: "EFFECT.SKJAALD.StatusCursed",
-    icon: "systems/skjaald/icons/svg/statuses/cursed.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/cursed.svg",
     pseudo: true
   },
   deafened: {
     label: "SKJAALD.ConDeafened",
-    icon: "systems/skjaald/icons/svg/statuses/deafened.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/deafened.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.6G8JSjhn701cBITY"
   },
   diseased: {
     label: "SKJAALD.ConDiseased",
-    icon: "systems/skjaald/icons/svg/statuses/diseased.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/diseased.svg",
     pseudo: true,
     reference: "Compendium.skjaald.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.oNQWvyRZkTOJ8PBq"
   },
   exhaustion: {
     label: "SKJAALD.ConExhaustion",
-    icon: "systems/skjaald/icons/svg/statuses/exhaustion.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/exhaustion.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv",
     levels: 6
   },
   frightened: {
     label: "SKJAALD.ConFrightened",
-    icon: "systems/skjaald/icons/svg/statuses/frightened.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/frightened.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.oreoyaFKnvZCrgij"
   },
   grappled: {
     label: "SKJAALD.ConGrappled",
-    icon: "systems/skjaald/icons/svg/statuses/grappled.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/grappled.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.gYDAhd02ryUmtwZn"
   },
   incapacitated: {
     label: "SKJAALD.ConIncapacitated",
-    icon: "systems/skjaald/icons/svg/statuses/incapacitated.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/incapacitated.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.TpkZgLfxCmSndmpb"
   },
   invisible: {
     label: "SKJAALD.ConInvisible",
-    icon: "systems/skjaald/icons/svg/statuses/invisible.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/invisible.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.3UU5GCTVeRDbZy9u"
   },
   paralyzed: {
     label: "SKJAALD.ConParalyzed",
-    icon: "systems/skjaald/icons/svg/statuses/paralyzed.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/paralyzed.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.xnSV5hLJIMaTABXP",
     statuses: ["incapacitated"]
   },
   petrified: {
     label: "SKJAALD.ConPetrified",
-    icon: "systems/skjaald/icons/svg/statuses/petrified.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/petrified.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.xaNDaW6NwQTgHSmi",
     statuses: ["incapacitated"]
   },
   poisoned: {
     label: "SKJAALD.ConPoisoned",
-    icon: "systems/skjaald/icons/svg/statuses/poisoned.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/poisoned.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.lq3TRI6ZlED8ABMx"
   },
   prone: {
     label: "SKJAALD.ConProne",
-    icon: "systems/skjaald/icons/svg/statuses/prone.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/prone.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.y0TkcdyoZlOTmAFT"
   },
   restrained: {
     label: "SKJAALD.ConRestrained",
-    icon: "systems/skjaald/icons/svg/statuses/restrained.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/restrained.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc"
   },
   silenced: {
     label: "EFFECT.SKJAALD.StatusSilenced",
-    icon: "systems/skjaald/icons/svg/statuses/silenced.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/silenced.svg",
     pseudo: true
   },
   stunned: {
     label: "SKJAALD.ConStunned",
-    icon: "systems/skjaald/icons/svg/statuses/stunned.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/stunned.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.ZyZMUwA2rboh4ObS",
     statuses: ["incapacitated"]
   },
   surprised: {
     label: "EFFECT.SKJAALD.StatusSurprised",
-    icon: "systems/skjaald/icons/svg/statuses/surprised.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/surprised.svg",
     pseudo: true
   },
   transformed: {
     label: "EFFECT.SKJAALD.StatusTransformed",
-    icon: "systems/skjaald/icons/svg/statuses/transformed.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/transformed.svg",
     pseudo: true
   },
   unconscious: {
     label: "SKJAALD.ConUnconscious",
-    icon: "systems/skjaald/icons/svg/statuses/unconscious.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/unconscious.svg",
     reference: "Compendium.skjaald.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd",
     statuses: ["incapacitated"],
     riders: ["prone"]
@@ -25406,53 +25406,53 @@ SKJAALD.conditionEffects = {
 SKJAALD.statusEffects = {
   burrowing: {
     name: "EFFECT.SKJAALD.StatusBurrowing",
-    icon: "systems/skjaald/icons/svg/statuses/burrowing.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/burrowing.svg",
     special: "BURROW"
   },
   concentrating: {
     name: "EFFECT.SKJAALD.StatusConcentrating",
-    icon: "systems/skjaald/icons/svg/statuses/concentrating.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/concentrating.svg",
     special: "CONCENTRATING"
   },
   dead: {
     name: "EFFECT.SKJAALD.StatusDead",
-    icon: "systems/skjaald/icons/svg/statuses/dead.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/dead.svg",
     special: "DEFEATED"
   },
   dodging: {
     name: "EFFECT.SKJAALD.StatusDodging",
-    icon: "systems/skjaald/icons/svg/statuses/dodging.svg"
+    icon: "systems/skjaald2/icons/svg/statuses/dodging.svg"
   },
   ethereal: {
     name: "EFFECT.SKJAALD.StatusEthereal",
-    icon: "systems/skjaald/icons/svg/statuses/ethereal.svg"
+    icon: "systems/skjaald2/icons/svg/statuses/ethereal.svg"
   },
   flying: {
     name: "EFFECT.SKJAALD.StatusFlying",
-    icon: "systems/skjaald/icons/svg/statuses/flying.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/flying.svg",
     special: "FLY"
   },
   hiding: {
     name: "EFFECT.SKJAALD.StatusHiding",
-    icon: "systems/skjaald/icons/svg/statuses/hiding.svg"
+    icon: "systems/skjaald2/icons/svg/statuses/hiding.svg"
   },
   hovering: {
     name: "EFFECT.SKJAALD.StatusHovering",
-    icon: "systems/skjaald/icons/svg/statuses/hovering.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/hovering.svg",
     special: "HOVER"
   },
   marked: {
     name: "EFFECT.SKJAALD.StatusMarked",
-    icon: "systems/skjaald/icons/svg/statuses/marked.svg"
+    icon: "systems/skjaald2/icons/svg/statuses/marked.svg"
   },
   sleeping: {
     name: "EFFECT.SKJAALD.StatusSleeping",
-    icon: "systems/skjaald/icons/svg/statuses/sleeping.svg",
+    icon: "systems/skjaald2/icons/svg/statuses/sleeping.svg",
     statuses: ["incapacitated", "unconscious"]
   },
   stable: {
     name: "EFFECT.SKJAALD.StatusStable",
-    icon: "systems/skjaald/icons/svg/statuses/stable.svg"
+    icon: "systems/skjaald2/icons/svg/statuses/stable.svg"
   }
 };
 
@@ -25590,7 +25590,7 @@ SKJAALD.traits = {
       title: "SKJAALD.ClassSaves",
       localization: "SKJAALD.TraitSavesPlural"
     },
-    icon: "systems/skjaald/icons/svg/trait-saves.svg",
+    icon: "systems/skjaald2/icons/svg/trait-saves.svg",
     actorKeyPath: "system.abilities",
     configKey: "abilities",
     labelKeyPath: "label"
@@ -25600,7 +25600,7 @@ SKJAALD.traits = {
       title: "SKJAALD.Skills",
       localization: "SKJAALD.TraitSkillsPlural"
     },
-    icon: "systems/skjaald/icons/svg/trait-skills.svg",
+    icon: "systems/skjaald2/icons/svg/trait-skills.svg",
     actorKeyPath: "system.skills",
     labelKeyPath: "label",
     expertise: true
@@ -25610,14 +25610,14 @@ SKJAALD.traits = {
       title: "SKJAALD.Languages",
       localization: "SKJAALD.TraitLanguagesPlural"
     },
-    icon: "systems/skjaald/icons/svg/trait-languages.svg"
+    icon: "systems/skjaald2/icons/svg/trait-languages.svg"
   },
   armor: {
     labels: {
       title: "SKJAALD.TraitArmorProf",
       localization: "SKJAALD.TraitArmorPlural"
     },
-    icon: "systems/skjaald/icons/svg/trait-armor-proficiencies.svg",
+    icon: "systems/skjaald2/icons/svg/trait-armor-proficiencies.svg",
     actorKeyPath: "system.traits.armorProf",
     configKey: "armorProficiencies",
     subtypes: { keyPath: "armor.type", ids: ["armorIds", "shieldIds"] }
@@ -25627,7 +25627,7 @@ SKJAALD.traits = {
       title: "SKJAALD.TraitWeaponProf",
       localization: "SKJAALD.TraitWeaponPlural"
     },
-    icon: "systems/skjaald/icons/svg/trait-weapon-proficiencies.svg",
+    icon: "systems/skjaald2/icons/svg/trait-weapon-proficiencies.svg",
     actorKeyPath: "system.traits.weaponProf",
     configKey: "weaponProficiencies",
     subtypes: { keyPath: "weaponType", ids: ["weaponIds"] }
@@ -25637,7 +25637,7 @@ SKJAALD.traits = {
       title: "SKJAALD.TraitToolProf",
       localization: "SKJAALD.TraitToolPlural"
     },
-    icon: "systems/skjaald/icons/svg/trait-tool-proficiencies.svg",
+    icon: "systems/skjaald2/icons/svg/trait-tool-proficiencies.svg",
     actorKeyPath: "system.tools",
     configKey: "toolProficiencies",
     subtypes: { keyPath: "toolType", ids: ["toolIds"] },
@@ -25650,7 +25650,7 @@ SKJAALD.traits = {
       title: "SKJAALD.DamImm",
       localization: "SKJAALD.TraitDIPlural"
     },
-    icon: "systems/skjaald/icons/svg/trait-damage-immunities.svg",
+    icon: "systems/skjaald2/icons/svg/trait-damage-immunities.svg",
     configKey: "damageTypes"
   },
   dr: {
@@ -25658,7 +25658,7 @@ SKJAALD.traits = {
       title: "SKJAALD.DamRes",
       localization: "SKJAALD.TraitDRPlural"
     },
-    icon: "systems/skjaald/icons/svg/trait-damage-resistances.svg",
+    icon: "systems/skjaald2/icons/svg/trait-damage-resistances.svg",
     configKey: "damageTypes"
   },
   dv: {
@@ -25666,7 +25666,7 @@ SKJAALD.traits = {
       title: "SKJAALD.DamVuln",
       localization: "SKJAALD.TraitDVPlural"
     },
-    icon: "systems/skjaald/icons/svg/trait-damage-vulnerabilities.svg",
+    icon: "systems/skjaald2/icons/svg/trait-damage-vulnerabilities.svg",
     configKey: "damageTypes"
   },
   ci: {
@@ -25674,7 +25674,7 @@ SKJAALD.traits = {
       title: "SKJAALD.ConImm",
       localization: "SKJAALD.TraitCIPlural"
     },
-    icon: "systems/skjaald/icons/svg/trait-condition-immunities.svg",
+    icon: "systems/skjaald2/icons/svg/trait-condition-immunities.svg",
     configKey: "conditionTypes"
   }
 };
@@ -25880,18 +25880,18 @@ SKJAALD.advancementTypes = {
  */
 SKJAALD.defaultArtwork = {
   Item: {
-    background: "systems/skjaald/icons/svg/items/background.svg",
-    class: "systems/skjaald/icons/svg/items/class.svg",
-    consumable: "systems/skjaald/icons/svg/items/consumable.svg",
-    container: "systems/skjaald/icons/svg/items/container.svg",
-    equipment: "systems/skjaald/icons/svg/items/equipment.svg",
-    feat: "systems/skjaald/icons/svg/items/feature.svg",
-    loot: "systems/skjaald/icons/svg/items/loot.svg",
-    race: "systems/skjaald/icons/svg/items/race.svg",
-    spell: "systems/skjaald/icons/svg/items/spell.svg",
-    subclass: "systems/skjaald/icons/svg/items/subclass.svg",
-    tool: "systems/skjaald/icons/svg/items/tool.svg",
-    weapon: "systems/skjaald/icons/svg/items/weapon.svg"
+    background: "systems/skjaald2/icons/svg/items/background.svg",
+    class: "systems/skjaald2/icons/svg/items/class.svg",
+    consumable: "systems/skjaald2/icons/svg/items/consumable.svg",
+    container: "systems/skjaald2/icons/svg/items/container.svg",
+    equipment: "systems/skjaald2/icons/svg/items/equipment.svg",
+    feat: "systems/skjaald2/icons/svg/items/feature.svg",
+    loot: "systems/skjaald2/icons/svg/items/loot.svg",
+    race: "systems/skjaald2/icons/svg/items/race.svg",
+    spell: "systems/skjaald2/icons/svg/items/spell.svg",
+    subclass: "systems/skjaald2/icons/svg/items/subclass.svg",
+    tool: "systems/skjaald2/icons/svg/items/tool.svg",
+    weapon: "systems/skjaald2/icons/svg/items/weapon.svg"
   }
 };
 
@@ -26133,7 +26133,7 @@ SKJAALD.tokenRings = {
     RING_GRADIENT: "SKJAALD.TokenRings.Effects.RingGradient",
     BKG_WAVE: "SKJAALD.TokenRings.Effects.BackgroundWave"
   },
-  spriteSheet: "systems/skjaald/tokens/composite/token-rings.json",
+  spriteSheet: "systems/skjaald2/tokens/composite/token-rings.json",
   shaderClass: null
 };
 preLocalize("tokenRings.effects");
@@ -26327,7 +26327,7 @@ class ModuleArt {
     const configs = [{
       id: game.system.id,
       label: game.system.title,
-      mapping: "systems/skjaald/json/fa-token-mapping.json",
+      mapping: "systems/skjaald2/json/fa-token-mapping.json",
       priority: settings.skjaald?.priority ?? CONST.SORT_INTEGER_DENSITY,
       credit: `
         <em>
@@ -26372,7 +26372,7 @@ class ModuleArtConfig extends FormApplication {
     return foundry.utils.mergeObject(super.defaultOptions, {
       title: game.i18n.localize("SKJAALD.ModuleArtConfigL"),
       id: "module-art-config",
-      template: "systems/skjaald/templates/apps/module-art-config.hbs",
+      template: "systems/skjaald2/templates/apps/module-art-config.hbs",
       popOut: true,
       width: 600,
       height: "auto"
@@ -27074,7 +27074,7 @@ class EffectsElement extends HTMLElement {
       },
       {
         name: "SKJAALD.ConcentrationBreak",
-        icon: '<skjaald-icon src="systems/skjaald/icons/svg/break-concentration.svg"></skjaald-icon>',
+        icon: '<skjaald-icon src="systems/skjaald2/icons/svg/break-concentration.svg"></skjaald-icon>',
         condition: () => isConcentrationEffect,
         callback: () => this.document.endConcentration(effect),
         group: "state"
@@ -27284,7 +27284,7 @@ class ActorAbilityConfig extends BaseConfigSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald"],
-      template: "systems/skjaald/templates/apps/ability-config.hbs",
+      template: "systems/skjaald2/templates/apps/ability-config.hbs",
       width: 500,
       height: "auto"
     });
@@ -27339,7 +27339,7 @@ class ActorArmorConfig extends BaseConfigSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "actor-armor-config"],
-      template: "systems/skjaald/templates/apps/actor-armor.hbs",
+      template: "systems/skjaald2/templates/apps/actor-armor.hbs",
       width: 320,
       height: "auto"
     });
@@ -27414,7 +27414,7 @@ class ActorConcentrationConfig extends BaseConfigSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald"],
-      template: "systems/skjaald/templates/apps/concentration-config.hbs",
+      template: "systems/skjaald2/templates/apps/concentration-config.hbs",
       width: 500,
       height: "auto"
     });
@@ -27459,7 +27459,7 @@ class ActorHitDiceConfig extends BaseConfigSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "hd-config", "dialog"],
-      template: "systems/skjaald/templates/apps/hit-dice-config.hbs",
+      template: "systems/skjaald2/templates/apps/hit-dice-config.hbs",
       width: 360,
       height: "auto"
     });
@@ -27558,7 +27558,7 @@ class ActorHitPointsConfig extends BaseConfigSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "actor-hit-points-config"],
-      template: "systems/skjaald/templates/apps/hit-points-config.hbs",
+      template: "systems/skjaald2/templates/apps/hit-points-config.hbs",
       width: 320,
       height: "auto"
     });
@@ -27651,7 +27651,7 @@ class ActorInitiativeConfig extends BaseConfigSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald"],
-      template: "systems/skjaald/templates/apps/initiative-config.hbs",
+      template: "systems/skjaald2/templates/apps/initiative-config.hbs",
       width: 360,
       height: "auto"
     });
@@ -27705,7 +27705,7 @@ class ActorMovementConfig extends BaseConfigSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald"],
-      template: "systems/skjaald/templates/apps/movement-config.hbs",
+      template: "systems/skjaald2/templates/apps/movement-config.hbs",
       width: 300,
       height: "auto",
       keyPath: "system.attributes.movement"
@@ -27766,7 +27766,7 @@ class ActorSensesConfig extends BaseConfigSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald"],
-      template: "systems/skjaald/templates/apps/senses-config.hbs",
+      template: "systems/skjaald2/templates/apps/senses-config.hbs",
       width: 300,
       height: "auto",
       keyPath: "system.attributes.senses"
@@ -27812,7 +27812,7 @@ class ActorSheetFlags extends BaseConfigSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: "actor-flags",
       classes: ["skjaald"],
-      template: "systems/skjaald/templates/apps/actor-flags.hbs",
+      template: "systems/skjaald2/templates/apps/actor-flags.hbs",
       width: 500,
       closeOnSubmit: true
     });
@@ -27942,7 +27942,7 @@ class ActorTypeConfig extends DocumentSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "actor-type", "trait-selector"],
-      template: "systems/skjaald/templates/apps/actor-type.hbs",
+      template: "systems/skjaald2/templates/apps/actor-type.hbs",
       width: 280,
       height: "auto",
       choices: {},
@@ -28079,7 +28079,7 @@ class DamageModificationConfig extends BaseConfigSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "damage-modification", "trait-selector", "subconfig"],
-      template: "systems/skjaald/templates/apps/damage-modification-config.hbs",
+      template: "systems/skjaald2/templates/apps/damage-modification-config.hbs",
       width: 320,
       height: "auto"
     });
@@ -28147,7 +28147,7 @@ class SourceConfig extends DocumentSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "source-config", "dialog"],
-      template: "systems/skjaald/templates/apps/source-config.hbs",
+      template: "systems/skjaald2/templates/apps/source-config.hbs",
       width: 400,
       height: "auto",
       sheetConfig: false,
@@ -28223,7 +28223,7 @@ class TraitSelector extends BaseConfigSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       id: "trait-selector",
       classes: ["skjaald", "trait-selector", "subconfig"],
-      template: "systems/skjaald/templates/apps/trait-selector.hbs",
+      template: "systems/skjaald2/templates/apps/trait-selector.hbs",
       width: 320,
       height: "auto",
       allowCustom: true
@@ -28372,7 +28372,7 @@ class ProficiencyConfig extends BaseConfigSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald"],
-      template: "systems/skjaald/templates/apps/proficiency-config.hbs",
+      template: "systems/skjaald2/templates/apps/proficiency-config.hbs",
       width: 500,
       height: "auto"
     });
@@ -28526,7 +28526,7 @@ class ActorSpellSlotsConfig extends DialogMixin(DocumentSheet) {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald2", "dialog"],
-      template: "systems/skjaald/templates/apps/spell-slots-config.hbs",
+      template: "systems/skjaald2/templates/apps/spell-slots-config.hbs",
       width: 450,
       height: "auto",
       sheetConfig: false,
@@ -28647,8 +28647,8 @@ class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /** @override */
   get template() {
-    if ( !game.user.isGM && this.actor.limited ) return "systems/skjaald/templates/actors/limited-sheet.hbs";
-    return `systems/skjaald/templates/actors/${this.actor.type}-sheet.hbs`;
+    if ( !game.user.isGM && this.actor.limited ) return "systems/skjaald2/templates/actors/limited-sheet.hbs";
+    return `systems/skjaald2/templates/actors/${this.actor.type}-sheet.hbs`;
   }
 
   /* -------------------------------------------- */
@@ -29435,7 +29435,7 @@ class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     }, {
       classes: ["dialog", "skjaald", "polymorph"],
       width: 900,
-      template: "systems/skjaald/templates/apps/polymorph-prompt.hbs"
+      template: "systems/skjaald2/templates/apps/polymorph-prompt.hbs"
     }).render(true);
   }
 
@@ -31585,7 +31585,7 @@ class SheetConfig5e extends DocumentSheetConfig {
   /** @inheritdoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      template: "systems/skjaald/templates/shared/sheet-config.hbs"
+      template: "systems/skjaald2/templates/shared/sheet-config.hbs"
     });
   }
 
@@ -31731,8 +31731,8 @@ class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
 
   /** @override */
   get template() {
-    if ( !game.user.isGM && this.actor.limited ) return "systems/skjaald/templates/actors/limited-sheet-2.hbs";
-    return "systems/skjaald/templates/actors/character-sheet-2.hbs";
+    if ( !game.user.isGM && this.actor.limited ) return "systems/skjaald2/templates/actors/limited-sheet-2.hbs";
+    return "systems/skjaald2/templates/actors/character-sheet-2.hbs";
   }
 
   /* -------------------------------------------- */
@@ -31785,7 +31785,7 @@ class ActorSheet5eCharacter2 extends ActorSheet5eCharacter {
       item.dataset.tooltip = label;
       item.setAttribute("aria-label", label);
       if ( icon ) item.innerHTML = `<i class="${icon}"></i>`;
-      else if ( svg ) item.innerHTML = `<skjaald-icon src="systems/skjaald/icons/svg/${svg}.svg"></skjaald-icon>`;
+      else if ( svg ) item.innerHTML = `<skjaald-icon src="systems/skjaald2/icons/svg/${svg}.svg"></skjaald-icon>`;
       return item;
     }));
     html[0].insertAdjacentElement("afterbegin", nav);
@@ -33472,7 +33472,7 @@ class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "sheet", "actor", "group"],
-      template: "systems/skjaald/templates/actors/group-sheet.hbs",
+      template: "systems/skjaald2/templates/actors/group-sheet.hbs",
       tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "members"}],
       scrollY: ["skjaald-inventory .inventory-list"],
       width: 620,
@@ -33932,7 +33932,7 @@ class AdvancementMigrationDialog extends Dialog {
       const dialog = new this({
         title: `${game.i18n.localize("SKJAALD.AdvancementMigrationTitle")}: ${item.name}`,
         content: await renderTemplate(
-          "systems/skjaald/templates/advancement/advancement-migration-dialog.hbs",
+          "systems/skjaald2/templates/advancement/advancement-migration-dialog.hbs",
           { item, advancements: advancementContext }
         ),
         buttons: {
@@ -33981,7 +33981,7 @@ class AdvancementSelection extends Dialog {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "sheet", "advancement"],
-      template: "systems/skjaald/templates/advancement/advancement-selection.hbs",
+      template: "systems/skjaald2/templates/advancement/advancement-selection.hbs",
       title: "SKJAALD.AdvancementSelectionTitle",
       width: 500,
       height: "auto"
@@ -35039,7 +35039,7 @@ class CurrencyManager extends DialogMixin(FormApplication) {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald2", "currency-manager", "dialog"],
       tabs: [{navSelector: "nav", contentSelector: ".sheet-content", initial: "transfer"}],
-      template: "systems/skjaald/templates/apps/currency-manager.hbs",
+      template: "systems/skjaald2/templates/apps/currency-manager.hbs",
       title: "SKJAALD.CurrencyManager.Title",
       width: 350,
       height: "auto"
@@ -35409,7 +35409,7 @@ class InventoryElement extends HTMLElement {
       },
       {
         name: "SKJAALD.ConcentrationBreak",
-        icon: '<skjaald-icon src="systems/skjaald/icons/svg/break-concentration.svg"></skjaald-icon>',
+        icon: '<skjaald-icon src="systems/skjaald2/icons/svg/break-concentration.svg"></skjaald-icon>',
         condition: () => this.actor.concentration?.items.has(item),
         callback: () => this.actor.endConcentration(item),
         group: "state"
@@ -35632,7 +35632,7 @@ class InventoryElement extends HTMLElement {
     } else {
       const enrichment = {secrets: this.document.isOwner};
       const chatData = item.system.getCardData ? item.system.getCardData(enrichment) : item.getChatData(enrichment);
-      const summary = $(await renderTemplate("systems/skjaald/templates/items/parts/item-summary.hbs", await chatData));
+      const summary = $(await renderTemplate("systems/skjaald2/templates/items/parts/item-summary.hbs", await chatData));
       $(li).append(summary.hide());
       summary.slideDown(200);
       this._app._expanded.add(item.id);
@@ -36747,7 +36747,7 @@ class EnchantmentConfig extends DocumentSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "enchantment-config"],
       dragDrop: [{ dropSelector: "form" }],
-      template: "systems/skjaald/templates/apps/enchantment-config.hbs",
+      template: "systems/skjaald2/templates/apps/enchantment-config.hbs",
       width: 500,
       height: "auto",
       sheetConfig: false,
@@ -36897,7 +36897,7 @@ class StartingEquipmentConfig extends DocumentSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "starting-equipment"],
       dragDrop: [{ dragSelector: ".drag-bar", dropSelector: "form" }],
-      template: "systems/skjaald/templates/apps/starting-equipment-config.hbs",
+      template: "systems/skjaald2/templates/apps/starting-equipment-config.hbs",
       width: 480,
       height: "auto",
       sheetConfig: false,
@@ -37153,7 +37153,7 @@ class SummoningConfig extends DocumentSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["skjaald", "summoning-config"],
       dragDrop: [{ dropSelector: "form" }],
-      template: "systems/skjaald/templates/apps/summoning-config.hbs",
+      template: "systems/skjaald2/templates/apps/summoning-config.hbs",
       width: 500,
       height: "auto",
       sheetConfig: false,
@@ -37370,7 +37370,7 @@ class ItemSheet5e extends ItemSheet {
 
   /** @inheritdoc */
   get template() {
-    return `systems/skjaald/templates/items/${this.item.type}.hbs`;
+    return `systems/skjaald2/templates/items/${this.item.type}.hbs`;
   }
 
   /* -------------------------------------------- */
@@ -38223,7 +38223,7 @@ class ContainerSheet extends ItemSheet5e {
 
   /** @inheritdoc */
   get template() {
-    return "systems/skjaald/templates/items/container.hbs";
+    return "systems/skjaald2/templates/items/container.hbs";
   }
 
   /* -------------------------------------------- */
@@ -38514,7 +38514,7 @@ class JournalEditor extends DocumentSheet {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["journal-editor"],
-      template: "systems/skjaald/templates/journal/journal-editor.hbs",
+      template: "systems/skjaald2/templates/journal/journal-editor.hbs",
       width: 550,
       height: 640,
       textKeyPath: null,
@@ -38575,7 +38575,7 @@ class JournalClassPageSheet extends JournalPageSheet {
 
   /** @inheritdoc */
   get template() {
-    return `systems/skjaald/templates/journal/page-${this.document.type}-${this.isEditable ? "edit" : "view"}.hbs`;
+    return `systems/skjaald2/templates/journal/page-${this.document.type}-${this.isEditable ? "edit" : "view"}.hbs`;
   }
 
   /* -------------------------------------------- */
@@ -39099,7 +39099,7 @@ class JournalRulePageSheet extends JournalTextPageSheet {
   /** @inheritdoc */
   get template() {
     return this.isEditable
-      ? "systems/skjaald/templates/journal/page-rule-edit.hbs"
+      ? "systems/skjaald2/templates/journal/page-rule-edit.hbs"
       : "templates/journal/page-text-view.html";
   }
 
@@ -39189,7 +39189,7 @@ class TableOfContentsCompendium extends Compendium {
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["table-of-contents"],
-      template: "systems/skjaald/templates/journal/table-of-contents.hbs",
+      template: "systems/skjaald2/templates/journal/table-of-contents.hbs",
       width: 800,
       height: 950,
       resizable: true,
@@ -39673,7 +39673,7 @@ class TokenConfig5e extends TokenConfig {
    * Template used to render the dynamic ring tab.
    * @type {string}
    */
-  static dynamicRingTemplate = "systems/skjaald/templates/apps/parts/dynamic-ring.hbs";
+  static dynamicRingTemplate = "systems/skjaald2/templates/apps/parts/dynamic-ring.hbs";
 
   /* -------------------------------------------- */
 
@@ -43196,7 +43196,7 @@ class RuleJournalPageData extends foundry.abstract.DataModel {
       })
     };
     return {
-      content: await renderTemplate("systems/skjaald/templates/journal/page-rule-tooltip.hbs", context),
+      content: await renderTemplate("systems/skjaald2/templates/journal/page-rule-tooltip.hbs", context),
       classes: ["skjaald-tooltip", "rule-tooltip"]
     };
   }
@@ -44744,8 +44744,8 @@ const migrateSceneData = function(scene, migrationData) {
 const getMigrationData = async function() {
   const data = {};
   try {
-    const icons = await fetch("systems/skjaald/json/icon-migration.json");
-    const spellIcons = await fetch("systems/skjaald/json/spell-icon-migration.json");
+    const icons = await fetch("systems/skjaald2/json/icon-migration.json");
+    const spellIcons = await fetch("systems/skjaald2/json/spell-icon-migration.json");
     data.iconMap = {...await icons.json(), ...await spellIcons.json()};
   } catch(err) {
     console.warn(`Failed to retrieve icon migration data: ${err.message}`);
@@ -44858,7 +44858,7 @@ function _migrateTokenImage(actorData, updateData) {
     const v = foundry.utils.getProperty(actorData, path);
     if ( oldSystemPNG.test(v) ) {
       const [type, fileName] = v.match(oldSystemPNG).slice(1);
-      updateData[path] = `systems/skjaald/tokens/${type}/${fileName}.webp`;
+      updateData[path] = `systems/skjaald2/tokens/${type}/${fileName}.webp`;
     }
   }
   return updateData;
@@ -45171,7 +45171,7 @@ class Tooltips5e {
     }
 
     this.tooltip.classList.add("skjaald-tooltip", "passive-tooltip");
-    this.tooltip.innerHTML = await renderTemplate("systems/skjaald/templates/journal/passive-tooltip.hbs", context);
+    this.tooltip.innerHTML = await renderTemplate("systems/skjaald2/templates/journal/passive-tooltip.hbs", context);
     game.tooltip._setAnchor(TooltipManager.TOOLTIP_DIRECTIONS.DOWN);
   }
 
@@ -45291,7 +45291,7 @@ Hooks.once("init", function() {
   CONFIG.Token.ringClass = TokenRing;
   CONFIG.User.documentClass = User5e;
   CONFIG.time.roundTime = 6;
-  Roll.TOOLTIP_TEMPLATE = "systems/skjaald/templates/chat/roll-breakdown.hbs";
+  Roll.TOOLTIP_TEMPLATE = "systems/skjaald2/templates/chat/roll-breakdown.hbs";
   CONFIG.Dice.DamageRoll = DamageRoll;
   CONFIG.Dice.D20Roll = D20Roll;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
@@ -45497,20 +45497,20 @@ function _configureFonts() {
     Roboto: {
       editor: true,
       fonts: [
-        { urls: ["systems/skjaald/fonts/roboto/Roboto-Regular.woff2"] },
-        { urls: ["systems/skjaald/fonts/roboto/Roboto-Bold.woff2"], weight: "bold" },
-        { urls: ["systems/skjaald/fonts/roboto/Roboto-Italic.woff2"], style: "italic" },
-        { urls: ["systems/skjaald/fonts/roboto/Roboto-BoldItalic.woff2"], weight: "bold", style: "italic" }
+        { urls: ["systems/skjaald2/fonts/roboto/Roboto-Regular.woff2"] },
+        { urls: ["systems/skjaald2/fonts/roboto/Roboto-Bold.woff2"], weight: "bold" },
+        { urls: ["systems/skjaald2/fonts/roboto/Roboto-Italic.woff2"], style: "italic" },
+        { urls: ["systems/skjaald2/fonts/roboto/Roboto-BoldItalic.woff2"], weight: "bold", style: "italic" }
       ]
     },
     "Roboto Condensed": {
       editor: true,
       fonts: [
-        { urls: ["systems/skjaald/fonts/roboto-condensed/RobotoCondensed-Regular.woff2"] },
-        { urls: ["systems/skjaald/fonts/roboto-condensed/RobotoCondensed-Bold.woff2"], weight: "bold" },
-        { urls: ["systems/skjaald/fonts/roboto-condensed/RobotoCondensed-Italic.woff2"], style: "italic" },
+        { urls: ["systems/skjaald2/fonts/roboto-condensed/RobotoCondensed-Regular.woff2"] },
+        { urls: ["systems/skjaald2/fonts/roboto-condensed/RobotoCondensed-Bold.woff2"], weight: "bold" },
+        { urls: ["systems/skjaald2/fonts/roboto-condensed/RobotoCondensed-Italic.woff2"], style: "italic" },
         {
-          urls: ["systems/skjaald/fonts/roboto-condensed/RobotoCondensed-BoldItalic.woff2"], weight: "bold",
+          urls: ["systems/skjaald2/fonts/roboto-condensed/RobotoCondensed-BoldItalic.woff2"], weight: "bold",
           style: "italic"
         }
       ]
@@ -45518,8 +45518,8 @@ function _configureFonts() {
     "Roboto Slab": {
       editor: true,
       fonts: [
-        { urls: ["systems/skjaald/fonts/roboto-slab/RobotoSlab-Regular.ttf"] },
-        { urls: ["systems/skjaald/fonts/roboto-slab/RobotoSlab-Bold.ttf"], weight: "bold" }
+        { urls: ["systems/skjaald2/fonts/roboto-slab/RobotoSlab-Regular.ttf"] },
+        { urls: ["systems/skjaald2/fonts/roboto-slab/RobotoSlab-Bold.ttf"], weight: "bold" }
       ]
     }
   });
@@ -45672,7 +45672,7 @@ Hooks.on("canvasDraw", gameCanvas => {
 Hooks.on("renderPause", (app, [html]) => {
   html.classList.add("skjaald2");
   const img = html.querySelector("img");
-  img.src = "systems/skjaald/ui/official/ampersand.svg";
+  img.src = "systems/skjaald2/ui/official/ampersand.svg";
   img.className = "";
 });
 
@@ -45709,7 +45709,7 @@ Hooks.on("renderSettings", (app, [html]) => {
   const badge = document.createElement("div");
   badge.classList.add("skjaald2", "system-badge");
   badge.innerHTML = `
-    <img src="systems/skjaald/ui/official/dnd-badge-32.webp" data-tooltip="${skjaald.title}" alt="${skjaald.title}">
+    <img src="systems/skjaald2/ui/official/dnd-badge-32.webp" data-tooltip="${skjaald.title}" alt="${skjaald.title}">
     <span class="system-info">${skjaald.version}</span>
   `;
   if ( pip ) badge.querySelector(".system-info").insertAdjacentElement("beforeend", pip);

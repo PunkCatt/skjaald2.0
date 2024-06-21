@@ -34,7 +34,7 @@
         {{!-- Attacks --}}
         {{#if hasAttack}}
         <button type="button" data-action="attack">
-            <i class="skjaald-icon" data-src="systems/skjaald/icons/svg/trait-weapon-proficiencies.svg"></i>
+            <i class="skjaald-icon" data-src="systems/skjaald2/icons/svg/trait-weapon-proficiencies.svg"></i>
             {{ localize "SKJAALD.Attack" }}
         </button>
         {{/if}}
@@ -43,7 +43,7 @@
         {{#if hasDamage}}
         <button type="button" data-action="damage">
             {{#if isHealing}}
-            <i class="skjaald-icon" data-src="systems/skjaald/icons/svg/damage/healing.svg"></i>
+            <i class="skjaald-icon" data-src="systems/skjaald2/icons/svg/damage/healing.svg"></i>
             {{ localize "SKJAALD.Healing" }}
             {{else}}
             <i class="fas fa-burst"></i>
@@ -55,7 +55,7 @@
         {{!-- Versatile --}}
         {{#if isVersatile}}
         <button type="button" data-action="versatile">
-            <i class="skjaald-icon" data-src="systems/skjaald/icons/svg/versatile.svg"></i>
+            <i class="skjaald-icon" data-src="systems/skjaald2/icons/svg/versatile.svg"></i>
             {{ localize "SKJAALD.Versatile" }}
         </button>
         {{/if}}
@@ -108,7 +108,7 @@
         {{!-- Ability Check --}}
         {{#if hasAbilityCheck}}
         <button type="button" data-action="abilityCheck" data-ability="{{ item.system.ability }}">
-            <i class="skjaald-icon" data-src="systems/skjaald/icons/svg/ability-score-improvement.svg"></i>
+            <i class="skjaald-icon" data-src="systems/skjaald2/icons/svg/ability-score-improvement.svg"></i>
             {{ labels.abilityCheck }}
         </button>
         {{/if}}

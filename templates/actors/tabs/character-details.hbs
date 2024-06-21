@@ -26,7 +26,7 @@
 {{#*inline "ability-prof"}}
     <li data-ability="{{ @key }}" class="{{ class }}">
         {{#if isConcentration}}
-        <skjaald-icon src="systems/skjaald/icons/svg/statuses/concentrating.svg"></skjaald-icon>
+        <skjaald-icon src="systems/skjaald2/icons/svg/statuses/concentrating.svg"></skjaald-icon>
         {{else}}
         <proficiency-cycle type="ability" name="{{ path }}.proficient" data-tooltip="{{ hover }}"
                            value="{{#if @root.editable}}{{ baseProf }}{{else}}{{ proficient }}{{/if}}"
@@ -48,7 +48,7 @@
     <div class="pills-group {{#unless values}}empty{{/unless}}">
         <h3 class="icon">
             {{#if icon}}<i class="{{ icon }}"></i>
-            {{~else if svg}}<skjaald-icon src="systems/skjaald/icons/svg/{{svg}}.svg"></skjaald-icon>{{/if}}
+            {{~else if svg}}<skjaald-icon src="systems/skjaald2/icons/svg/{{svg}}.svg"></skjaald-icon>{{/if}}
             <span class="roboto-upper">{{ localize label }}</span>
             {{#if @root.editable}}
             <a class="trait-selector" data-trait="{{ key }}"

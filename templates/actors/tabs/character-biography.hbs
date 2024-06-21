@@ -2,7 +2,7 @@
     <div class="textbox-half">
         <h3 class="icon">
             {{#if icon}}<i class="{{ icon }}"></i>
-            {{~else if svg}}<skjaald-icon src="systems/skjaald/icons/svg/{{svg}}.svg"></skjaald-icon>{{/if}}
+            {{~else if svg}}<skjaald-icon src="systems/skjaald2/icons/svg/{{svg}}.svg"></skjaald-icon>{{/if}}
             <span class="roboto-upper">{{ localize label }}</span>
         </h3>
         {{#if @root.editable}}
@@ -55,7 +55,7 @@
     <div class="bottom">
         <h3 class="icon">
             <i class="fas fa-feather"></i>
-            <skjaald-icon src="systems/skjaald/icons/svg/ink-pot.svg"></skjaald-icon>
+            <skjaald-icon src="systems/skjaald2/icons/svg/ink-pot.svg"></skjaald-icon>
             <span class="roboto-upper">{{ localize "SKJAALD.Biography" }}</span>
         </h3>
         {{ editor biographyHTML target="system.details.biography.value" button=false editable=@root.editable

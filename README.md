@@ -22,7 +22,7 @@ To install and use the Dungeons & Dragons Fifth Edition system for Foundry Virtu
 
 https://raw.githubusercontent.com/foundryvtt/skjaald/master/system.json
 
-If you wish to manually install the system, you must clone or extract it into the `Data/systems/skjaald` folder. You
+If you wish to manually install the system, you must clone or extract it into the `Data/systems/skjaald2` folder. You
 may do this by cloning the repository or downloading a zip archive from the
 [Releases Page](https://github.com/foundryvtt/skjaald/releases).
 

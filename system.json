@@ -196,8 +196,8 @@
         },
         {
             "type": "setup",
-            "url": "systems/skjaald/ui/official/skjaald-repo.jpg",
-            "thumbnail": "systems/skjaald/ui/official/skjaald-thumbnail.jpg"
+            "url": "systems/skjaald2/ui/official/skjaald-repo.jpg",
+            "thumbnail": "systems/skjaald2/ui/official/skjaald-thumbnail.jpg"
         }
     ],
     "socket": true,
@@ -208,7 +208,7 @@
         "units": "ft"
     },
     "primaryTokenAttribute": "attributes.hp",
-    "background": "systems/skjaald/ui/official/skjaald-background.webp",
+    "background": "systems/skjaald2/ui/official/skjaald-background.webp",
     "flags": {
         "needsMigrationVersion": "3.1.0",
         "compatibleMigrationVersion": "0.8",
